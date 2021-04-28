@@ -1,138 +1,340 @@
 <template>
-  <q-page class="q-pa-sm">
+  <q-page class="q-pa-md">
+    <!-- <div class="row q-gutter-sm"> -->
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-md-3">
-        <q-card class="my-card">
+        <q-card class="my-card q-ma-xs">
           <q-card-section class="bg-green text-white">
             <div class="text-h6 absolute-center">使用中</div>
-            <!-- <div class="text-subtitle2">by John Doe</div> -->
           </q-card-section>
-
-          <q-separator />
-
+          <!-- <q-separator /> -->
           <q-list>
-            <q-item clickable>
-              <q-item-section>
-                <q-icon color="primary" name="local_bar" />
-              </q-item-section>
-
-              <q-item-section>
-                <q-item-label>Bar XYZ</q-item-label>
-                <q-item-label caption>Have a drink.</q-item-label>
-              </q-item-section>
+            <q-item>
+              <q-item-section avatar> 機台編號 </q-item-section>
+              <q-item-section> 95271 </q-item-section>
             </q-item>
-
-            <q-item clickable>
-              <q-item-section avatar>
-                <q-icon color="red" name="local_gas_station" />
-              </q-item-section>
-
-              <q-item-section>
-                <q-item-label>Gas Station</q-item-label>
-                <q-item-label caption>Fill your gas tank.</q-item-label>
-              </q-item-section>
+            <q-item>
+              <q-item-section avatar> 產品事號 </q-item-section>
+              <q-item-section> 5209527 </q-item-section>
             </q-item>
-
-            <q-item clickable>
-              <q-item-section avatar>
-                <q-icon color="amber" name="local_movies" />
-              </q-item-section>
-
-              <q-item-section>
-                <q-item-label>Cinema XYZ</q-item-label>
-                <q-item-label caption>Watch a movie.</q-item-label>
-              </q-item-section>
+            <q-item>
+              <q-item-section avatar> 品號 </q-item-section>
+              <q-item-section> AQQQ9988654 </q-item-section>
             </q-item>
           </q-list>
+          <q-separator color="orange" inset />
+          <q-card-section>
+            <q-linear-progress size="25px" :value="progress1" color="accent">
+              <div class="absolute-full flex flex-center">
+                <q-badge
+                  color="white"
+                  text-color="accent"
+                  :label="progressLabel1"
+                />
+              </div>
+            </q-linear-progress>
+          </q-card-section>
         </q-card>
       </div>
-      <div class="col-xs-12 col-sm-6 col-md-3">col1</div>
-      <div class="col-xs-12 col-sm-6 col-md-3">col1</div>
-      <div class="col-xs-12 col-sm-6 col-md-3">col1</div>
-      <div class="col-xs-12 col-sm-6 col-md-3">col1</div>
-      <div class="col-xs-12 col-sm-6 col-md-3">col1</div>
-      <div class="col-xs-12 col-sm-6 col-md-3">col1</div>
-      <div class="col-xs-12 col-sm-6 col-md-3">col1</div>
-      <div class="col-xs-12 col-sm-6 col-md-3">col1</div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <q-card class="my-card q-ma-xs">
+          <q-card-section class="bg-red text-white">
+            <div class="text-h6 absolute-center">停機</div>
+          </q-card-section>
+          <q-separator />
+          <q-list>
+            <q-item>
+              <q-item-section avatar> 機台編號 </q-item-section>
+              <q-item-section> 95272 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 產品事號 </q-item-section>
+              <q-item-section> 5209527 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 品號 </q-item-section>
+              <q-item-section> AQQQ9988654 </q-item-section>
+            </q-item>
+          </q-list>
+          <q-separator />
+          <q-linear-progress size="25px" :value="progress1" color="warning">
+            <div class="absolute-full flex flex-center">
+              <q-badge
+                color="white"
+                text-color="accent"
+                :label="progressLabel1"
+              />
+            </div>
+          </q-linear-progress>
+        </q-card>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <q-card class="my-card q-ma-xs">
+          <q-card-section class="bg-green text-white">
+            <div class="text-h6 absolute-center">使用中</div>
+          </q-card-section>
+          <q-separator />
+          <q-list>
+            <q-item>
+              <q-item-section avatar> 機台編號 </q-item-section>
+              <q-item-section> 95273 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 產品事號 </q-item-section>
+              <q-item-section> 5209527 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 品號 </q-item-section>
+              <q-item-section> AQQQ9988654 </q-item-section>
+            </q-item>
+          </q-list>
+          <q-separator />
+          <q-linear-progress size="25px" :value="progress1" color="secondary">
+            <div class="absolute-full flex flex-center">
+              <q-badge
+                color="white"
+                text-color="accent"
+                :label="progressLabel1"
+              />
+            </div>
+          </q-linear-progress>
+        </q-card>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <q-card class="my-card q-ma-xs">
+          <q-card-section class="bg-brown text-white">
+            <div class="text-h6 absolute-center">維護中</div>
+          </q-card-section>
+          <q-separator />
+          <q-list>
+            <q-item>
+              <q-item-section avatar> 機台編號 </q-item-section>
+              <q-item-section> 95274 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 產品事號 </q-item-section>
+              <q-item-section> 5209527 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 品號 </q-item-section>
+              <q-item-section> AQQQ9988654 </q-item-section>
+            </q-item>
+          </q-list>
+          <q-separator />
+          <q-linear-progress size="25px" :value="progress1" color="purple">
+            <div class="absolute-full flex flex-center">
+              <q-badge
+                color="white"
+                text-color="accent"
+                :label="progressLabel1"
+              />
+            </div>
+          </q-linear-progress>
+        </q-card>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <q-card class="my-card q-ma-xs">
+          <q-card-section class="bg-red text-white">
+            <div class="text-h6 absolute-center">停機</div>
+          </q-card-section>
+          <q-separator />
+          <q-list>
+            <q-item>
+              <q-item-section avatar> 機台編號 </q-item-section>
+              <q-item-section> 95275 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 產品事號 </q-item-section>
+              <q-item-section> 5209527 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 品號 </q-item-section>
+              <q-item-section> AQQQ9988654 </q-item-section>
+            </q-item>
+          </q-list>
+          <q-separator />
+          <q-linear-progress size="25px" :value="progress1" color="negative">
+            <div class="absolute-full flex flex-center">
+              <q-badge
+                color="white"
+                text-color="accent"
+                :label="progressLabel1"
+              />
+            </div>
+          </q-linear-progress>
+        </q-card>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <q-card class="my-card q-ma-xs">
+          <q-card-section class="bg-red text-white">
+            <div class="text-h6 absolute-center">停機</div>
+          </q-card-section>
+          <q-list>
+            <q-item>
+              <q-item-section avatar> 機台編號 </q-item-section>
+              <q-item-section> 95276 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 產品事號 </q-item-section>
+              <q-item-section> 5209527 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 品號 </q-item-section>
+              <q-item-section> AQQQ9988654 </q-item-section>
+            </q-item>
+          </q-list>
+          <q-card-section>
+            <q-markup-table dense>
+              <thead>
+                <tr>
+                  <th class="text-left">測試</th>
+                  <th class="text-right">Calories</th>
+                  <th class="text-right">Fat (g)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-left">Frozen</td>
+                  <td class="text-right">159</td>
+                  <td class="text-right">6</td>
+                </tr>
+                <tr>
+                  <td class="text-left">Ice</td>
+                  <td class="text-right">237</td>
+                  <td class="text-right">9</td>
+                </tr>
+                <tr>
+                  <td class="text-left">Eclair</td>
+                  <td class="text-right">262</td>
+                  <td class="text-right">16</td>
+                </tr>
+                <tr>
+                  <td class="text-left">Cupcake</td>
+                  <td class="text-right text-red">305</td>
+                  <td class="text-right text-red">3.7</td>
+                </tr>
+                <tr>
+                  <td class="text-left">Gingerd</td>
+                  <td class="text-right text-blue">356</td>
+                  <td class="text-right text-blue">16</td>
+                </tr>
+              </tbody>
+            </q-markup-table>
+          </q-card-section>
+        </q-card>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <q-card class="my-card q-ma-xs">
+          <q-card-section class="bg-green text-white">
+            <div class="text-h6 absolute-center">使用中</div>
+          </q-card-section>
+          <q-separator />
+          <q-list>
+            <q-item>
+              <q-item-section avatar> 機台編號 </q-item-section>
+              <q-item-section> 95277 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 產品事號 </q-item-section>
+              <q-item-section> 5209527 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 品號 </q-item-section>
+              <q-item-section> AQQQ9988654 </q-item-section>
+            </q-item>
+          </q-list>
+          <q-separator />
+          <q-linear-progress size="25px" :value="progress1" color="accent">
+            <div class="absolute-full flex flex-center">
+              <q-badge
+                color="white"
+                text-color="accent"
+                :label="progressLabel1"
+              />
+            </div>
+          </q-linear-progress>
+        </q-card>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <q-card class="my-card q-ma-xs">
+          <q-card-section class="bg-green text-white">
+            <div class="text-h6 absolute-center">使用中</div>
+          </q-card-section>
+          <q-separator />
+          <q-list>
+            <q-item>
+              <q-item-section avatar> 機台編號 </q-item-section>
+              <q-item-section> 95278 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 產品事號 </q-item-section>
+              <q-item-section> 5209527 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 品號 </q-item-section>
+              <q-item-section> AQQQ9988654 </q-item-section>
+            </q-item>
+          </q-list>
+          <q-separator />
+          <q-linear-progress
+            stripe
+            size="25px"
+            :value="progress1"
+            color="accent"
+          >
+            <div class="absolute-full flex flex-center">
+              <q-badge
+                color="white"
+                text-color="accent"
+                :label="progressLabel1"
+              />
+            </div>
+          </q-linear-progress>
+        </q-card>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <q-card class="my-card q-ma-xs">
+          <q-card-section class="bg-green text-white">
+            <div class="text-h6 absolute-center">使用中</div>
+          </q-card-section>
+          <q-separator />
+          <q-list>
+            <q-item>
+              <q-item-section avatar> 機台編號 </q-item-section>
+              <q-item-section> 95279 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 產品事號 </q-item-section>
+              <q-item-section> 5209527 </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section avatar> 品號 </q-item-section>
+              <q-item-section> AQQQ9988654 </q-item-section>
+            </q-item>
+          </q-list>
+          <q-separator />
+          <q-linear-progress size="25px" :value="progress1" color="accent">
+            <div class="absolute-full flex flex-center">
+              <q-badge
+                color="white"
+                text-color="accent"
+                :label="progressLabel1"
+              />
+            </div>
+          </q-linear-progress>
+        </q-card>
+      </div>
       <div class="col-xs-12 col-sm-6 col-md-3">col1</div>
       <div class="col-xs-12 col-sm-6 col-md-3">col1</div>
       <div class="col-xs-12 col-sm-6 col-md-3">col1</div>
       <div class="col-xs-12 col-sm-6 col-md-3">col1</div>
       <div class="col-xs-12 col-sm-6 col-md-3">col1</div>
     </div>
-    <!-- <div class="row q-col-gutter-lg">
-      <div class="col-lg-4 col-md-3 col-xs-12 col-sm-12">
-        <q-card class="my-card">
-          <q-card-section class="bg-primary text-white">
-            <div class="text-h6">Our Changing Planet</div>
-            <div class="text-subtitle2">by John Doe</div>
-          </q-card-section>
-
-          <q-separator />
-
-          <q-card-actions align="right">
-            <q-btn flat>Action 1</q-btn>
-            <q-btn flat>Action 2</q-btn>
-          </q-card-actions>
-        </q-card>
-        <q-card class="my-card">
-          <q-card-section class="bg-purple text-white">
-            <div class="text-h6">Our Changing Planet</div>
-            <div class="text-subtitle2">by John Doe</div>
-          </q-card-section>
-
-          <q-card-actions align="around">
-            <q-btn flat>Action 1</q-btn>
-            <q-btn flat>Action 2</q-btn>
-          </q-card-actions>
-        </q-card>
-      </div>
-      <div class="col-lg-4 col-md-3 col-xs-12 col-sm-12">
-        <q-card class="my-card">
-          <img src="https://cdn.quasar.dev/img/parallax2.jpg" />
-
-          <q-list>
-            <q-item clickable>
-              <q-item-section avatar>
-                <q-icon color="primary" name="local_bar" />
-              </q-item-section>
-
-              <q-item-section>
-                <q-item-label>Bar XYZ</q-item-label>
-                <q-item-label caption>Have a drink.</q-item-label>
-              </q-item-section>
-            </q-item>
-
-            <q-item clickable>
-              <q-item-section avatar>
-                <q-icon color="red" name="local_gas_station" />
-              </q-item-section>
-
-              <q-item-section>
-                <q-item-label>Gas Station</q-item-label>
-                <q-item-label caption>Fill your gas tank.</q-item-label>
-              </q-item-section>
-            </q-item>
-
-            <q-item clickable>
-              <q-item-section avatar>
-                <q-icon color="amber" name="local_movies" />
-              </q-item-section>
-
-              <q-item-section>
-                <q-item-label>Cinema XYZ</q-item-label>
-                <q-item-label caption>Watch a movie.</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-card>
-      </div>
-      <div class="col-lg-4 col-md-3 col-xs-12 col-sm-12"></div>
-    </div> -->
   </q-page>
 </template>
 
 <script>
+import { ref, computed } from 'vue'
 export default {
   name: 'Cards',
   // components: {
@@ -164,6 +366,14 @@ export default {
   // created() {
   //   this.profile_data.text = this.text
   // },
+  setup() {
+    const progress1 = ref(0.3)
+
+    return {
+      progress1,
+      progressLabel1: computed(() => (progress1.value * 100).toFixed(2) + '%'),
+    }
+  },
 }
 </script>
 
