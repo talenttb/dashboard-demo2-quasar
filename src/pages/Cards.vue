@@ -243,16 +243,21 @@
               <q-item-section> AQQQ9988654 </q-item-section>
             </q-item>
           </q-list>
-          <q-separator />
-          <q-linear-progress size="25px" :value="progress1" color="accent">
-            <div class="absolute-full flex flex-center">
-              <q-badge
-                color="white"
-                text-color="accent"
-                :label="progressLabel1"
-              />
-            </div>
-          </q-linear-progress>
+
+          <q-card-actions align="center">
+            <q-circular-progress
+              show-value
+              font-size="12px"
+              :value="70"
+              size="100px"
+              :thickness="0.22"
+              color="teal"
+              track-color="grey-3"
+              class="q-ma-md"
+            >
+              70%
+            </q-circular-progress>
+          </q-card-actions>
         </q-card>
       </div>
       <div class="col-xs-12 col-sm-6 col-md-3">
