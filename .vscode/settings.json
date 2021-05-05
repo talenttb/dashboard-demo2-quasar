@@ -3,5 +3,6 @@
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
   
 "vetur.experimental.templateInterpolationService": true,
-"volar.tsPlugin": false
+"volar.tsPlugin": false,
+"json.maxItemsComputed": 3000
 }
