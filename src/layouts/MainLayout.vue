@@ -101,7 +101,11 @@
           </q-item-section>
         </q-item>
 
-        <q-expansion-item icon="pages" label="Pages">
+        <!-- <q-expansion-item
+          icon="pages"
+          label="Pages"
+          expand-icon-class="text-white"
+        >
           <q-list class="q-pl-lg">
             <q-item to="/" active-class="q-item-no-link-highlighting">
               <q-item-section avatar>
@@ -159,7 +163,11 @@
             </q-item>
           </q-list>
         </q-expansion-item>
-        <q-expansion-item icon="map" label="Maps">
+        <q-expansion-item
+          icon="map"
+          label="Maps"
+          expand-icon-class="text-white"
+        >
           <q-list class="q-pl-lg">
             <q-item to="/Map" active-class="q-item-no-link-highlighting">
               <q-item-section avatar>
@@ -183,6 +191,142 @@
               </q-item-section>
               <q-item-section>
                 <q-item-label>Street View</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-expansion-item> -->
+
+        <q-expansion-item
+          icon="share_location"
+          label="ERP"
+          expand-icon-class="text-white"
+        >
+          <q-list class="q-pl-lg">
+            <q-item to="/Map" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="map" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Map</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-expansion-item>
+
+        <q-expansion-item
+          icon="handyman"
+          label="製造"
+          expand-icon-class="text-white"
+        >
+          <q-list class="q-pl-lg">
+            <q-item to="/Map" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="map" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Map</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-expansion-item>
+
+        <q-expansion-item
+          icon="sensors"
+          label="設備"
+          expand-icon-class="text-white"
+        >
+          <q-list class="q-pl-lg">
+            <q-item to="/Map" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="map" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Map</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-expansion-item>
+
+        <q-expansion-item
+          icon="manage_search"
+          label="品質控制"
+          expand-icon-class="text-white"
+        >
+          <q-list class="q-pl-lg">
+            <q-item to="/Map" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="map" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Map</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-expansion-item>
+
+        <q-expansion-item
+          icon="monitor"
+          label="監控"
+          expand-icon-class="text-white"
+        >
+          <q-list class="q-pl-lg">
+            <q-item to="/Map" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="map" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Map</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-expansion-item>
+
+        <q-expansion-item
+          icon="trending_up"
+          label="報表"
+          expand-icon-class="text-white"
+        >
+          <q-list class="q-pl-lg">
+            <q-item to="/Map" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="map" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Map</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-expansion-item>
+
+        <q-expansion-item
+          icon="alarm"
+          label="警報"
+          expand-icon-class="text-white"
+        >
+          <q-list class="q-pl-lg">
+            <q-item to="/Map" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="map" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Map</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-expansion-item>
+
+        <q-expansion-item
+          icon="people"
+          label="人員"
+          expand-icon-class="text-white"
+        >
+          <q-list class="q-pl-lg">
+            <q-item to="/Map" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="map" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Map</q-item-label>
               </q-item-section>
             </q-item>
           </q-list>
