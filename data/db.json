@@ -1,0 +1,68 @@
+{
+  "posts": [{ "id": 1, "title": "json-server", "author": "typicode" }],
+  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
+  "profile": { "code": "typicode" },
+  "machines": ["A01"],
+  "moulds": [
+    {
+      "mould_id": "1",
+      "mould_code": "LC033-G",
+      "mould_part_id": "1",
+      "mould_part_code": "LC033-G01上",
+      "part_type": "top",
+      "alias": "",
+      "monthly_output": 25,
+      "current_output": 52
+    },
+    {
+      "mould_id": "1",
+      "mould_code": "LC033-G",
+      "mould_part_id": "2",
+      "mould_part_code": "LC033-G02下",
+      "part_type": "bottom",
+      "alias": "",
+      "monthly_output": 27,
+      "current_output": 54
+    },
+    {
+      "mould_id": "2",
+      "mould_code": "LC034-G",
+      "mould_part_id": "3",
+      "mould_part_code": "LC034-G01上",
+      "part_type": "top",
+      "alias": "",
+      "monthly_output": 24,
+      "current_output": 48
+    },
+    {
+      "mould_id": "2",
+      "mould_code": "LC034-G",
+      "mould_part_id": "4",
+      "mould_part_code": "LC034-G02下",
+      "part_type": "bottom",
+      "alias": "",
+      "monthly_output": 31,
+      "current_output": 24
+    },
+    {
+      "mould_id": "3",
+      "mould_code": "LC033-G",
+      "mould_part_id": "5",
+      "mould_part_code": "LC033-G01上",
+      "part_type": "top",
+      "alias": "",
+      "monthly_output": 12,
+      "current_output": 42
+    },
+    {
+      "mould_id": "3",
+      "mould_code": "LC033-G",
+      "mould_part_id": "6",
+      "mould_part_code": "",
+      "part_type": "core",
+      "alias": "",
+      "monthly_output": 34,
+      "current_output": 21
+    }
+  ]
+}

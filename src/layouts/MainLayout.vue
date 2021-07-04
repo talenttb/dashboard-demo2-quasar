@@ -644,6 +644,15 @@
           expand-icon-class="text-white"
         >
           <q-list class="q-pl-lg">
+            <q-item
+              :to="{ name: 'Inspection' }"
+              active-class="q-item-no-link-highlighting"
+            >
+              <q-item-section avatar> </q-item-section>
+              <q-item-section>
+                <q-item-label>巡檢記錄即時連線</q-item-label>
+              </q-item-section>
+            </q-item>
             <q-item to="/Map" active-class="q-item-no-link-highlighting">
               <q-item-section avatar> </q-item-section>
               <q-item-section>
@@ -675,12 +684,6 @@
             <q-item to="/Map" active-class="q-item-no-link-highlighting">
               <q-item-section avatar> </q-item-section>
               <q-item-section>
-                <q-item-label>巡檢記錄即時連線</q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item to="/Map" active-class="q-item-no-link-highlighting">
-              <q-item-section avatar> </q-item-section>
-              <q-item-section>
                 <q-item-label>SOP/SIP/生產指示即時線上檢視</q-item-label>
               </q-item-section>
             </q-item>
@@ -699,8 +702,12 @@
           label="報表"
           expand-icon-class="text-white"
         >
+          <!-- :to="{ name: 'Mould'}" -->
           <q-list class="q-pl-lg">
-            <q-item to="/Map" active-class="q-item-no-link-highlighting">
+            <q-item
+              to="/reports/moulds"
+              active-class="q-item-no-link-highlighting"
+            >
               <q-item-section avatar> </q-item-section>
               <q-item-section>
                 <q-item-label>模具報表</q-item-label>
