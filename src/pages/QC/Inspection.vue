@@ -1,32 +1,17 @@
 <template>
   <q-page padding style="padding-top: 66px">
-    <div class="q-pa-md">
+    <div class="q-pa-md q-gutter-y-md">
       <div class="row">
         <q-select
           rounded
           outlined
           v-model="queryMach"
           :options="machOptions"
-          label="Rounded outlined"
+          label="機台清單"
+          style="min-width: 300px"
         />
-        <!-- <q-input filled v-model="queryDate" mask="date" :rules="['date']">
-          <template v-slot:append>
-            <q-icon name="event" class="cursor-pointer">
-              <q-popup-proxy
-                ref="qDateProxy"
-                transition-show="scale"
-                transition-hide="scale"
-              >
-                <q-date v-model="queryDate" today-btn>
-                  <div class="row items-center justify-end">
-                    <q-btn v-close-popup label="Close" color="primary" flat />
-                  </div>
-                </q-date>
-              </q-popup-proxy>
-            </q-icon>
-          </template>
-        </q-input> -->
       </div>
+
       <div class="row">
         <q-btn push color="secondary" label="查詢" @click="loadData" />
       </div>
@@ -90,7 +75,7 @@ import QuasarNotify from '../../libs/errorNotify'
 
 export default {
   name: 'Inspection',
-  setup() {
+  async setup() {
     const $q = useQuasar()
     // const data = ref(null)
     const visible = ref(false)
@@ -111,6 +96,13 @@ export default {
 
     const queryMach = ref(null)
     const machOptions = ref([])
+
+    const r = await api.get('/api/machines').catch((err) => {
+      QuasarNotify($q, err.message)
+      return { data: '123123' }
+    })
+
+    machOptions.value = r.data
 
     const columns = [
       { name: 'mould_id', label: 'Mould id', field: 'mould_id' },
@@ -161,29 +153,10 @@ export default {
       myTitle,
       machOptions,
       queryMach,
+      options: ['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'],
     }
   },
 }
 </script>
 
 <style scoped></style>
-<style lang="sass">
-.my-sticky-virtscroll-table
-  /* height or max-height is important */
-  height: 410px
-
-  .q-table__top,
-  .q-table__bottom,
-  thead tr:first-child th /* bg color is important for th; just specify one */
-    background-color: #fff
-
-  thead tr th
-    position: sticky
-    z-index: 1
-  /* this will be the loading indicator */
-  thead tr:last-child th
-    /* height of all previous header rows */
-    top: 48px
-  thead tr:first-child th
-    top: 0
-</style>
