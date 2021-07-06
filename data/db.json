@@ -3,6 +3,49 @@
   "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
   "profile": { "code": "typicode" },
   "machines": ["A01"],
+  "inspections": [
+    {
+      "id": "machines"
+    }
+  ],
+  "A01": [
+    {
+      "machine_id": "A01",
+      "mfr_order_id": "5101-20201114-32",
+      "item_id": "311-L0328-A",
+      "item_name": "（精鍛）滾亂",
+      "begin_at": "2021-07-05T21:57:58.211+08:00",
+      "end_at": "",
+      "output": 288
+    },
+    {
+      "machine_id": "A01",
+      "mfr_order_id": "5101-20201114-23",
+      "item_id": "311-L0342-A",
+      "item_name": "（精鍛）滾亂",
+      "begin_at": "2021-07-05T20:57:58.211+08:00",
+      "end_at": "2021-07-05T21:57:58.211+08:00",
+      "output": 321
+    },
+    {
+      "machine_id": "A01",
+      "mfr_order_id": "5101-20201114-51",
+      "item_id": "311-L0358-B",
+      "item_name": "（精鍛）滾亂",
+      "begin_at": "2021-07-05T19:57:58.211+08:00",
+      "end_at": "2021-07-05T20:57:58.211+08:00",
+      "output": 465
+    },
+    {
+      "machine_id": "A01",
+      "mfr_order_id": "5101-20201114-02",
+      "item_id": "311-L0120-F",
+      "item_name": "（精鍛）滾亂",
+      "begin_at": "2021-07-05T18:57:58.211+08:00",
+      "end_at": "2021-07-05T19:57:58.211+08:00",
+      "output": 368
+    }
+  ],
   "moulds": [
     {
       "mould_id": "1",

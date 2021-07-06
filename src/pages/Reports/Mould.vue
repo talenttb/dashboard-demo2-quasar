@@ -92,7 +92,7 @@ export default {
     const visible = ref(false)
     const showSimulatedReturnData = ref(false)
     const timeStamp = +new Date()
-    const dt = date.formatDate(timeStamp, 'YYYY/MM/DD')
+    const dt = date.formatDate(timeStamp, 'YYYY-MM-DD')
     const queryDate = ref(dt)
     const myTitle = ref('')
     const visibleColumns = ref([
@@ -135,7 +135,7 @@ export default {
       showSimulatedReturnData.value = true
       rows.value = response.data
       myTitle.value = `報表 - ${queryDate.value}`
-      // console.log(response.data)
+      console.table(response.data)
     }
 
     // async function queryData() {
