@@ -18,7 +18,21 @@
         <q-btn push color="secondary" label="查詢" @click="loadData" />
       </div>
     </div>
-
+    <!-- <template v-slot:top>
+          <q-btn
+            color="primary"
+            :disable="selected.length == 0"
+            label="Add row"
+            @click="addRow"
+          />
+          <q-btn
+            class="q-ml-sm"
+            color="primary"
+            :disable="selected.length == 0"
+            label="Remove row"
+          />
+        </template>
+         -->
     <div class="q-pa-md">
       <q-table
         :title="myTitle"
@@ -37,20 +51,6 @@
         table-header-class="bg-cyan-2"
         @selection="onSelection"
       >
-        <template v-slot:top>
-          <q-btn
-            color="primary"
-            :disable="selected.length == 0"
-            label="Add row"
-            @click="addRow"
-          />
-          <q-btn
-            class="q-ml-sm"
-            color="primary"
-            :disable="selected.length == 0"
-            label="Remove row"
-          />
-        </template>
       </q-table>
 
       <q-inner-loading :showing="visible">
@@ -75,14 +75,8 @@
           <q-btn
             color="primary"
             :disable="selected.length == 0"
-            label="Add row"
+            label="新增記錄"
             @click="addRow"
-          />
-          <q-btn
-            class="q-ml-sm"
-            color="primary"
-            :disable="selected.length == 0"
-            label="Remove row"
           />
         </template>
       </q-table>
@@ -100,25 +94,131 @@
       </q-toolbar>
     </q-page-sticky>
   </q-page>
+
+  <q-dialog
+    v-model="showAddRow"
+    persistent
+    transition-show="scale"
+    transition-hide="scale"
+  >
+    <q-card style="width: 700px; max-width: 80vw">
+      <q-card-section>
+        <div class="text-h6">新增記錄</div>
+      </q-card-section>
+
+      <!-- <q-card-section class="q-pt-none">
+        Click/Tap on the backdrop.
+      </q-card-section> -->
+
+      <!-- @submit="onSubmitRecord"
+          @reset="onReset" -->
+      <q-card-section class="bg-white text-teal">
+        <q-form ref="recordForm" class="q-gutter-md" @submit.prevent="">
+          <q-input
+            v-model="recordObj.mfr_order_id"
+            label="製令工單"
+            dense
+            readonly
+          />
+          <q-input v-model="recordObj.item_id" label="品號" dense readonly />
+
+          <!-- <q-input
+            filled
+            v-model="recordObj.inspect_item"
+            label="巡檢項目"
+            hint="請填寫巡檢項目"
+            lazy-rules
+            dense
+            :rules="[(val) => (val && val.length > 0) || '請填寫巡檢項目']"
+          /> -->
+
+          <!-- mfr_order_id: null,
+      item_id: null,
+      inspect_item: null,
+      inspect_method: null,
+      inspected_at: null,
+      inspection_content: null,
+      produce_member: null,
+      self_inspected_member: null,
+      inspected_member: null, -->
+
+          <q-select
+            filled
+            v-model="recordObj.inspect_item"
+            :options="['自主檢查', '協同檢查']"
+            label="巡檢項目"
+            stack-label
+            dense
+            options-dense
+            :rules="[(val) => (val && val.length > 0) || '請填寫巡檢項目']"
+          />
+
+          <q-select
+            filled
+            v-model="recordObj.inspect_method"
+            :options="['定期檢查', '臨時檢查']"
+            label="巡檢方式"
+            stack-label
+            dense
+            options-dense
+            :rules="[(val) => (val && val.length > 0) || '請填寫巡檢方式']"
+          />
+
+          <div>
+            <q-btn
+              label="取消"
+              color="primary"
+              flat
+              class="q-ml-sm"
+              v-close-popup
+              @click="onCancel"
+            />
+
+            <q-btn
+              label="新增"
+              type="submit"
+              color="primary"
+              v-close-popup="okClose"
+              @click="onNew"
+            />
+          </div>
+        </q-form>
+      </q-card-section>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { api } from 'boot/axios'
-import { date, useQuasar } from 'quasar'
+import { date, useQuasar, extend } from 'quasar'
 import QuasarNotify from '../../libs/errorNotify'
 
 export default {
   name: 'Inspection',
   async setup() {
     const $q = useQuasar()
+    const recordForm = ref(null)
     const imDataSet = ref(null)
     const mfrTblRef = ref(null)
     const visible = ref(false)
-    const selected = ref([])
+    const showAddRow = ref(false)
+    const selected = reactive([])
     const showSimulatedReturnData = ref(false)
     const myTitle = ref('')
     const queryMachRef = ref(null)
+    const okClose = ref(false)
+    const recordObj = reactive({
+      mfr_order_id: null,
+      item_id: null,
+      inspect_item: null,
+      inspect_method: null,
+      inspected_at: null,
+      inspection_content: null,
+      produce_member: null,
+      self_inspected_member: null,
+      inspected_member: null,
+    })
     const visibleColumns = ref([
       'machine_id',
       'mfr_order_id',
@@ -256,6 +356,67 @@ export default {
       myTitle.value = `報表 - ${queryMach.value}`
     }
 
+    function clearRecordObj() {
+      // recordObj.mfr_order_id = null
+      // recordObj.item_id = null
+      recordObj.inspect_item = null
+      recordObj.inspect_method = null
+      recordObj.inspected_at = null
+      recordObj.inspection_content = null
+      recordObj.produce_member = null
+      recordObj.self_inspected_member = null
+      recordObj.inspected_member = null
+    }
+
+    function onSelection({ rows, added, evt }) {
+      if (rows.length === 0 || mfrTblRef.value === void 0) {
+        return
+      }
+
+      const row = rows[0]
+
+      if (added) {
+        imTitle.value = `巡檢記錄（${row.mfr_order_id}）`
+        imLoading.value = true
+        imTableShow.value = true
+
+        recordObj.mfr_order_id = row.mfr_order_id
+        recordObj.item_id = row.item_id
+        // console.log(recordObj)
+
+        imRows.value = [
+          {
+            inspect_id: 1,
+            mfr_order_id: row.mfr_order_id,
+            item_id: row.item_id,
+            inspect_item: '自主',
+            inspect_method: '自主',
+            inspected_at: '2021-07-05T20:57:58.211+08:00',
+            inspection_content: '',
+            produce_member: '',
+            self_inspected_member: '',
+            inspected_member: '',
+          },
+          {
+            inspect_id: 2,
+            mfr_order_id: row.mfr_order_id,
+            item_id: row.item_id,
+            inspect_item: '自主',
+            inspect_method: '自主',
+            inspected_at: '2021-07-05T21:57:58.211+08:00',
+            inspection_content: '',
+            produce_member: '',
+            self_inspected_member: '',
+            inspected_member: '',
+          },
+        ]
+      } else {
+        imTableShow.value = false
+        recordObj.mfr_order_id = null
+        recordObj.item_id = null
+      }
+    }
+
     return {
       loadData,
       mfrTblRef,
@@ -277,51 +438,37 @@ export default {
         (val) => (val && val.length > 0) || 'Please type something',
       ],
       addRow() {
-        console.log(123)
+        showAddRow.value = true
+        okClose.value = false
       },
-      onSelection({ rows, added, evt }) {
-        if (rows.length === 0 || mfrTblRef.value === void 0) {
+      async onNew() {
+        const validResult = await recordForm.value.validate()
+        if (!validResult) {
           return
         }
 
-        const row = rows[0]
+        okClose.value = validResult
 
-        if (added) {
-          imTitle.value = `巡檢記錄（${row.mfr_order_id}）`
-          imLoading.value = true
-          imTableShow.value = true
+        recordObj.inspect_item = 3
+        recordObj.inspect_item = '自主2'
+        recordObj.inspect_method = '自主2'
+        recordObj.inspected_at = '2021-07-05T21:57:58.211+08:00'
+        recordObj.inspection_content = ''
+        recordObj.produce_member = ''
+        recordObj.self_inspected_member = ''
+        recordObj.inspected_member = ''
 
-          imRows.value = [
-            {
-              inspect_id: 1,
-              mfr_order_id: row.mfr_order_id,
-              item_id: row.item_id,
-              inspect_item: '自主',
-              inspect_method: '自主',
-              inspected_at: '2021-07-05T20:57:58.211+08:00',
-              inspection_content: '',
-              produce_member: '',
-              self_inspected_member: '',
-              inspected_member: '',
-            },
-            {
-              inspect_id: 2,
-              mfr_order_id: row.mfr_order_id,
-              item_id: row.item_id,
-              inspect_item: '自主',
-              inspect_method: '自主',
-              inspected_at: '2021-07-05T21:57:58.211+08:00',
-              inspection_content: '',
-              produce_member: '',
-              self_inspected_member: '',
-              inspected_member: '',
-            },
-          ]
-        } else {
-          imTableShow.value = false
-        }
+        imRows.value.push(extend(true, {}, recordObj))
+        clearRecordObj()
       },
-
+      async onCancel() {
+        clearRecordObj()
+      },
+      onSelection,
+      recordObj,
+      okClose,
+      recordForm,
+      showAddRow,
       imTitle,
       imRows,
       imHeader,
