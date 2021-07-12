@@ -80,10 +80,6 @@
           />
         </template>
       </q-table>
-
-      <q-inner-loading :showing="visible">
-        <q-spinner-gears size="50px" color="primary" />
-      </q-inner-loading>
     </div>
 
     <!-- place QPageSticky at end of page -->

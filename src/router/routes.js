@@ -20,6 +20,17 @@ const routes = [
         path: '/qc/inspections',
         component: () => import('pages/QC/Inspection.vue'),
       },
+      {
+        name: 'EquimentOutputStatus',
+        path: '/monitor/equipment-output-status',
+        component: () => import('pages/Monitor/EquimentOutputStatus.vue'),
+      },
+      {
+        name: 'ForgingMachineActivationRate',
+        path: '/monitor/forging-machine-activation-rate',
+        component: () =>
+          import('pages/Monitor/ForgingMachineActivationRate.vue'),
+      },
     ],
   },
 

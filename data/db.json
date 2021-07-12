@@ -107,5 +107,17 @@
       "monthly_output": 34,
       "current_output": 21
     }
+  ],
+  "estimates": [
+    {
+      "id": "1",
+      "mould_code": "LC033-G",
+      "mould_part_id": "1",
+      "mould_part_code": "LC033-G01上",
+      "part_type": "top",
+      "alias": "",
+      "monthly_output": 25,
+      "current_output": 52
+    }
   ]
 }

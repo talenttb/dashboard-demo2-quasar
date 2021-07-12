@@ -651,7 +651,7 @@
               >
                 <q-item-section avatar> </q-item-section>
                 <q-item-section>
-                  <q-item-label>巡檢記錄即時連線</q-item-label>
+                  <q-item-label>*巡檢記錄即時連線</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
@@ -670,16 +670,22 @@
             expand-icon-class="text-white"
           >
             <q-list class="q-pl-lg">
-              <q-item to="/Map" active-class="q-item-no-link-highlighting">
+              <q-item
+                :to="{ name: 'EquimentOutputStatus' }"
+                active-class="q-item-no-link-highlighting"
+              >
                 <q-item-section avatar> </q-item-section>
                 <q-item-section>
-                  <q-item-label>機台設備完工計量即時狀態表</q-item-label>
+                  <q-item-label>*機台設備完工計量即時狀態表</q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item to="/Map" active-class="q-item-no-link-highlighting">
+              <q-item
+                :to="{ name: 'ForgingMachineActivationRate' }"
+                active-class="q-item-no-link-highlighting"
+              >
                 <q-item-section avatar> </q-item-section>
                 <q-item-section>
-                  <q-item-label>鍛造機台稼動率</q-item-label>
+                  <q-item-label>*鍛造機台稼動率</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
@@ -711,7 +717,7 @@
               >
                 <q-item-section avatar> </q-item-section>
                 <q-item-section>
-                  <q-item-label>模具報表</q-item-label>
+                  <q-item-label>*模具報表</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
