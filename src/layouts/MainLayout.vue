@@ -709,7 +709,6 @@
             label="報表"
             expand-icon-class="text-white"
           >
-            <!-- :to="{ name: 'Mould'}" -->
             <q-list class="q-pl-lg">
               <q-item
                 to="/reports/moulds"
@@ -732,10 +731,13 @@
                   <q-item-label>設備OEE報表</q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item to="/Map" active-class="q-item-no-link-highlighting">
+              <q-item
+                :to="{ name: 'WorkOrder' }"
+                active-class="q-item-no-link-highlighting"
+              >
                 <q-item-section avatar> </q-item-section>
                 <q-item-section>
-                  <q-item-label>工單日報</q-item-label>
+                  <q-item-label>*工單日報</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item to="/Map" active-class="q-item-no-link-highlighting">

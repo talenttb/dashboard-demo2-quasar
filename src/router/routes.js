@@ -16,6 +16,11 @@ const routes = [
         component: () => import('pages/Reports/Mould.vue'),
       },
       {
+        name: 'WorkOrder',
+        path: '/reports/WorkOrder',
+        component: () => import('pages/Reports/WorkOrder.vue'),
+      },
+      {
         name: 'Inspection',
         path: '/qc/inspections',
         component: () => import('pages/QC/Inspection.vue'),

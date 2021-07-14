@@ -119,5 +119,85 @@
       "monthly_output": 25,
       "current_output": 52
     }
+  ],
+  "work_orders": [
+    {
+      "order_id": "2201-2020008371",
+      "work_order_id": "5101-29388294",
+      "item_id": "22998-37338-A",
+      "item_name": "（鍛造）圓形直徑67",
+      "work_status": "已完工",
+      "produce_output": 508,
+      "std_output_per_hour": null,
+      "actual_output_per_hour": 520,
+      "productivity": null,
+      "usage_time": 637,
+      "usage_power": 31.17
+    },
+    {
+      "order_id": "2201-2020008371",
+      "work_order_id": "5101-29388295",
+      "item_id": "22998-37338-A",
+      "item_name": "（鍛造）圓形直徑67",
+      "work_status": "已完工",
+      "produce_output": 508,
+      "std_output_per_hour": null,
+      "actual_output_per_hour": 520,
+      "productivity": null,
+      "usage_time": 637,
+      "usage_power": 31.17
+    },
+    {
+      "order_id": "2201-2020008371",
+      "work_order_id": "5101-29388296",
+      "item_id": "22998-37338-A",
+      "item_name": "（鍛造）圓形直徑67",
+      "work_status": "已完工",
+      "produce_output": 508,
+      "std_output_per_hour": null,
+      "actual_output_per_hour": 520,
+      "productivity": null,
+      "usage_time": 637,
+      "usage_power": 31.17
+    },
+    {
+      "order_id": "2201-2020008371",
+      "work_order_id": "5101-29388297",
+      "item_id": "22998-37338-A",
+      "item_name": "（鍛造）圓形直徑67",
+      "work_status": "已完工",
+      "produce_output": 508,
+      "std_output_per_hour": null,
+      "actual_output_per_hour": 520,
+      "productivity": null,
+      "usage_time": 637,
+      "usage_power": 31.17
+    },
+    {
+      "order_id": "2201-2020008371",
+      "work_order_id": "5101-29388298",
+      "item_id": "22998-37338-A",
+      "item_name": "（鍛造）圓形直徑67",
+      "work_status": "已完工",
+      "produce_output": 508,
+      "std_output_per_hour": null,
+      "actual_output_per_hour": 520,
+      "productivity": null,
+      "usage_time": 637,
+      "usage_power": 31.17
+    },
+    {
+      "order_id": "2201-2020008371",
+      "work_order_id": "5101-29388299",
+      "item_id": "22998-37338-A",
+      "item_name": "（鍛造）圓形直徑67",
+      "work_status": "已完工",
+      "produce_output": 508,
+      "std_output_per_hour": null,
+      "actual_output_per_hour": 520,
+      "productivity": null,
+      "usage_time": 637,
+      "usage_power": 31.17
+    }
   ]
 }
