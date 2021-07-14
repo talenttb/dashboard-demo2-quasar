@@ -688,6 +688,15 @@
                   <q-item-label>*鍛造機台稼動率</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-item
+                :to="{ name: 'ForgingMachineCurrentStatus' }"
+                active-class="q-item-no-link-highlighting"
+              >
+                <q-item-section avatar> </q-item-section>
+                <q-item-section>
+                  <q-item-label>*鍛造機台即時狀態</q-item-label>
+                </q-item-section>
+              </q-item>
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
                 <q-item-section avatar> </q-item-section>
                 <q-item-section>
@@ -717,6 +726,15 @@
                 <q-item-section avatar> </q-item-section>
                 <q-item-section>
                   <q-item-label>*模具報表</q-item-label>
+                </q-item-section>
+              </q-item>
+              <q-item
+                :to="{ name: 'History' }"
+                active-class="q-item-no-link-highlighting"
+              >
+                <q-item-section avatar> </q-item-section>
+                <q-item-section>
+                  <q-item-label>*歷史資料查詢</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
@@ -925,7 +943,7 @@ export default defineComponent({
     const $q = useQuasar()
 
     console.log($q.platform)
-    console.log($q.version)
+
     const link = ref('')
 
     const leftDrawerOpen = ref(false)

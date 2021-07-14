@@ -62,13 +62,13 @@ import { ref, computed } from 'vue'
 import { api } from 'boot/axios'
 import { date, useQuasar } from 'quasar'
 import QuasarNotify from '../../libs/errorNotify'
-import * as dateUtils from '../../libs/dateUtils'
+import * as dateUtils from '@/libs/dateUtils'
 
 export default {
-  name: 'Mould',
+  name: 'WorkOrder',
   setup() {
     const $q = useQuasar()
-    // const data = ref(null)
+
     const loadingAnimate = ref(false)
     const showData = ref(false)
     const timeStamp = +new Date()

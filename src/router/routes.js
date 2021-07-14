@@ -13,12 +13,17 @@ const routes = [
       { path: '/Charts', component: () => import('pages/Charts.vue') },
       {
         path: '/reports/moulds',
-        component: () => import('pages/Reports/Mould.vue'),
+        component: () => import('pages/reports/Mould.vue'),
       },
       {
         name: 'WorkOrder',
         path: '/reports/WorkOrder',
-        component: () => import('pages/Reports/WorkOrder.vue'),
+        component: () => import('pages/reports/WorkOrder.vue'),
+      },
+      {
+        name: 'History',
+        path: '/reports/History',
+        component: () => import('pages/reports/History.vue'),
       },
       {
         name: 'Inspection',
@@ -28,13 +33,19 @@ const routes = [
       {
         name: 'EquimentOutputStatus',
         path: '/monitor/equipment-output-status',
-        component: () => import('pages/Monitor/EquimentOutputStatus.vue'),
+        component: () => import('pages/monitor/EquimentOutputStatus.vue'),
       },
       {
         name: 'ForgingMachineActivationRate',
         path: '/monitor/forging-machine-activation-rate',
         component: () =>
-          import('pages/Monitor/ForgingMachineActivationRate.vue'),
+          import('pages/monitor/ForgingMachineActivationRate.vue'),
+      },
+      {
+        name: 'ForgingMachineCurrentStatus',
+        path: '/monitor/forging-machine-current-status',
+        component: () =>
+          import('pages/monitor/ForgingMachineCurrentStatus.vue'),
       },
     ],
   },
