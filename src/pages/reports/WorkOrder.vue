@@ -1,7 +1,7 @@
 <template>
   <!-- style="max-width: 300px" -->
   <q-page padding style="padding-top: 66px">
-    <div class="q-pa-md">
+    <div class="q-pa-md" :class="$q.dark.isActive ? 'query-section--dark' : ''">
       <div class="row">
         <q-input filled v-model="queryDate" mask="date" :rules="['date']">
           <template v-slot:append>
@@ -49,7 +49,10 @@
 
     <!-- place QPageSticky at end of page -->
     <q-page-sticky expand position="top">
-      <q-toolbar class="bg-light-blue-6 text-white">
+      <q-toolbar
+        class="text-white"
+        :class="$q.dark.isActive ? 'sub-title-dark' : 'sub-title-normal'"
+      >
         <q-avatar> </q-avatar>
         <q-toolbar-title>工單日報</q-toolbar-title>
       </q-toolbar>

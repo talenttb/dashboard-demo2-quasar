@@ -47,6 +47,11 @@ const routes = [
         component: () =>
           import('pages/monitor/ForgingMachineCurrentStatus.vue'),
       },
+      {
+        name: 'TVView',
+        path: '/monitor/tv-view',
+        component: () => import('pages/monitor/TVView.vue'),
+      },
     ],
   },
 

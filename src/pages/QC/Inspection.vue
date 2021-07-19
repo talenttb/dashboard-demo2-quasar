@@ -1,6 +1,9 @@
 <template>
   <q-page padding style="padding-top: 66px">
-    <div class="q-pa-md q-gutter-y-md">
+    <div
+      class="q-pa-md q-gutter-y-md"
+      :class="$q.dark.isActive ? 'query-section--dark' : ''"
+    >
       <div class="row">
         <q-select
           rounded
@@ -59,12 +62,12 @@
     </div>
 
     <div class="q-pa-md">
+      <!-- :loading="imLoading" -->
       <q-table
         :title="imTitle"
         :rows="imRows"
         :columns="imHeader"
         :visible-columns="imVisibleColumns"
-        :loading="imLoading"
         v-show="imTableShow"
         row-key="inspect_id"
         :pagination="initialPagination"
@@ -84,7 +87,10 @@
 
     <!-- place QPageSticky at end of page -->
     <q-page-sticky expand position="top">
-      <q-toolbar class="bg-light-blue-6 text-white">
+      <q-toolbar
+        class="text-white"
+        :class="$q.dark.isActive ? 'sub-title-dark' : 'sub-title-normal'"
+      >
         <q-avatar> </q-avatar>
         <q-toolbar-title>巡檢記錄即時連線</q-toolbar-title>
       </q-toolbar>

@@ -24,7 +24,10 @@
 
     <!-- place QPageSticky at end of page -->
     <q-page-sticky expand position="top">
-      <q-toolbar class="bg-light-blue-6 text-white">
+      <q-toolbar
+        class="text-white"
+        :class="$q.dark.isActive ? 'sub-title-dark' : 'sub-title-normal'"
+      >
         <q-avatar> </q-avatar>
         <q-toolbar-title>鍛造機台即時狀態</q-toolbar-title>
       </q-toolbar>
@@ -33,7 +36,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, computed } from 'vue'
+import { ref, reactive, onMounted, computed, watch } from 'vue'
 import { api } from 'boot/axios'
 import { useQuasar } from 'quasar'
 import QuasarNotify from '../../libs/errorNotify'
@@ -69,7 +72,48 @@ export default {
       loadData()
     })
 
-    const { chartOptions, chartSeries } = chart(chartRef)
+    const { chartOptions, chartSeries } = chart(chartRef, $q.dark.isActive)
+
+    // theme: {
+    //   mode: $q.dark.isActive ? 'dark' : 'light',
+    // },
+    watch(
+      () => $q.dark.isActive,
+      (val) => {
+        console.log(val ? 'On dark mode' : 'On light mode')
+        // const g = chart(chartRef,val)
+        // chartOptions.value = g.chartOptions.value
+        // chartOptions.value = g.chartOptions.value
+
+        // chartOptions
+        // console.log(chartOptions.value.theme)
+        // chartOptions.value = {
+        //   ...chartOptions.value,
+        //   ...{
+        //     theme: {
+        //       mode: val ? 'dark' : 'light',
+        //     },
+        //   },
+        // }
+        // chartRef.value.updateOptions({
+        //   theme: {
+        //     mode: val ? 'dark' : 'light',
+        //   },
+        // })
+        // window.ApexCharts.exec('apexchartsrealtime', 'updateOptions', {
+        //   theme: {
+        //     mode: false ? 'dark' : 'light',
+        //   },
+        // })
+
+        // theme: {
+        //   mode: $q.dark.isActive ? 'dark' : 'light',
+        // },
+        chartOptions.theme = val ? { mode: 'dark' } : { mode: 'light' }
+        console.log(chartOptions.theme)
+      }
+    )
+
     return {
       showData,
       loadingAnimate,

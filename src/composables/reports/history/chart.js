@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
-
-export default function chart() {
+import { useQuasar } from 'quasar'
+export default function chart(isDarkActive) {
   // const chartOptions = ref({
   //   chart: {
   //     id: 'vuechart-example',
@@ -23,6 +23,8 @@ export default function chart() {
   //   },
   // ])
 
+  // const $q = useQuasar()
+  // console.log($q.dark.isActive)
   const chartOptions = ref({
     chart: {
       height: 350,
@@ -30,6 +32,9 @@ export default function chart() {
       zoom: {
         enabled: false,
       },
+    },
+    theme: {
+      mode: isDarkActive ? 'dark' : 'light',
     },
     dataLabels: {
       enabled: false,
@@ -119,7 +124,7 @@ export default function chart() {
     },
   ])
 
-  function changeLinearChart() {
+  function changeLinearChart(useDark = false) {
     const max = 90
     const min = 20
     const newData = chartSeries.value[0].data.map(() => {
@@ -127,10 +132,13 @@ export default function chart() {
     })
 
     const colors = ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0']
-
+    console.log(useDark)
     chartOptions.value = {
       ...chartOptions.value,
       ...{
+        theme: {
+          mode: useDark ? 'dark' : 'light',
+        },
         colors: [colors[Math.floor(Math.random() * colors.length)]],
       },
     }

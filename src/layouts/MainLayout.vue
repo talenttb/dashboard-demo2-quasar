@@ -1,7 +1,10 @@
 <template>
   <Suspense>
     <q-layout view="lHh Lpr lFf">
-      <q-header elevated>
+      <q-header
+        elevated
+        :class="$q.dark.isActive ? 'header_dark' : 'header_normal'"
+      >
         <q-toolbar>
           <q-btn
             flat
@@ -12,11 +15,20 @@
             @click="toggleLeftDrawer"
           />
 
+          <q-btn dense label="test" aria-label="Menu" @click="dynamicAddFav" />
+
           <q-toolbar-title> Quasar App </q-toolbar-title>
           <q-space />
           <div>Quasar v{{ $q.version }}</div>
           <q-space />
           <div class="q-gutter-sm row items-center no-wrap">
+            <q-btn
+              class="q-mr-xs"
+              flat
+              round
+              @click="$q.dark.toggle()"
+              :icon="$q.dark.isActive ? 'nights_stay' : 'wb_sunny'"
+            />
             <q-btn
               round
               dense
@@ -57,7 +69,8 @@
         v-model="leftDrawerOpen"
         show-if-above
         bordered
-        class="bg-primary text-white"
+        class="text-white"
+        :class="$q.dark.isActive ? 'drawerdark' : 'drawer-normal'"
       >
         <q-list>
           <q-item
@@ -74,7 +87,28 @@
             </q-item-section>
           </q-item>
 
-          <q-item
+          <!-- 資源及計畫 -->
+          <q-expansion-item
+            icon="share_location"
+            label="我的最愛"
+            expand-icon-class="text-white"
+          >
+            <q-list>
+              <q-item
+                v-for="page in favorites"
+                :key="page.id"
+                to="/Map"
+                active-class="q-item-no-link-highlighting"
+              >
+                <q-item-section avatar> </q-item-section>
+                <q-item-section>
+                  <q-item-label>{{ page.name }}</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-expansion-item>
+
+          <!-- <q-item
             to="/Cards"
             :active="link === 'cards'"
             @click="link = 'cards'"
@@ -100,7 +134,7 @@
             <q-item-section>
               <q-item-label>Charts</q-item-label>
             </q-item-section>
-          </q-item>
+          </q-item> -->
 
           <!-- <q-expansion-item
           icon="pages"
@@ -205,8 +239,6 @@
           >
             <q-list class="q-pl-lg">
               <q-expansion-item
-                dense
-                dense-toggle
                 icon=""
                 label="MRP-物料需求計畫"
                 expand-icon-class="text-grey-5"
@@ -233,31 +265,7 @@
                 </q-list>
               </q-expansion-item>
 
-              <!-- <q-expansion-item
-              dense
-              dense-toggle
-              icon=""
-              label="MRPII-製造資源計畫"
-              expand-icon-class="text-grey-5"
-            >
-              <q-list>
-                <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                  <q-item-section avatar> </q-item-section>
-                  <q-item-section>
-                    <q-item-label>MPS-主生產計畫</q-item-label>
-                  </q-item-section>
-                </q-item>
-                <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                  <q-item-section avatar> </q-item-section>
-                  <q-item-section>
-                    <q-item-label>BOM-物料清單</q-item-label>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </q-expansion-item> -->
-
               <q-expansion-item
-                dense
                 dense-toggle
                 icon=""
                 label="LRP-物流資源計畫"
@@ -280,7 +288,6 @@
               </q-expansion-item>
 
               <q-expansion-item
-                dense
                 dense-toggle
                 icon=""
                 label="MPS-主生產計畫"
@@ -315,7 +322,6 @@
               </q-expansion-item>
 
               <q-expansion-item
-                dense
                 dense-toggle
                 icon=""
                 label="配銷管理系統"
@@ -362,7 +368,6 @@
               </q-expansion-item>
 
               <q-expansion-item
-                dense
                 dense-toggle
                 icon=""
                 label="生產/製造管理系統"
@@ -412,12 +417,10 @@
           >
             <q-list class="q-pl-lg">
               <q-expansion-item
-                dense
                 dense-toggle
                 icon=""
                 label="MMS-物料管理系統"
                 expand-icon-class="text-grey-5"
-                class="bg-indigo-13"
               >
                 <q-list class="text-white shadow-5 rounded-borders">
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
@@ -445,12 +448,10 @@
 
               <!-- WIP-在製品管理系統 -->
               <q-expansion-item
-                dense
                 dense-toggle
                 icon=""
                 label="WIP-在製品管理系統"
                 expand-icon-class="text-grey-5"
-                class="bg-indigo-13"
               >
                 <q-list class="text-white shadow-5 rounded-borders">
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
@@ -499,12 +500,10 @@
 
               <!-- LMS-標籤管理系統 -->
               <q-expansion-item
-                dense
                 dense-toggle
                 icon=""
                 label="LMS-標籤管理系統"
                 expand-icon-class="text-grey-5"
-                class="bg-indigo-13"
               >
                 <q-list class="text-white shadow-5 rounded-borders">
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
@@ -532,12 +531,10 @@
 
               <!-- Tool-零配件管理 -->
               <q-expansion-item
-                dense
                 dense-toggle
                 icon=""
                 label="Tool-零配件管理"
                 expand-icon-class="text-grey-5"
-                class="bg-indigo-13"
               >
                 <q-list class="text-white shadow-5 rounded-borders">
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
@@ -551,12 +548,10 @@
 
               <!-- CMS-載具管理 -->
               <q-expansion-item
-                dense
                 dense-toggle
                 icon=""
                 label="CMS-載具管理"
                 expand-icon-class="text-grey-5"
-                class="bg-indigo-13"
               >
                 <q-list class="text-white shadow-5 rounded-borders">
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
@@ -584,12 +579,10 @@
 
               <!-- ALM-警示管理 -->
               <q-expansion-item
-                dense
                 dense-toggle
                 icon=""
                 label="ALM-警示管理"
                 expand-icon-class="text-grey-5"
-                class="bg-indigo-13"
               >
                 <q-list class="text-white shadow-5 rounded-borders">
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
@@ -695,6 +688,15 @@
                 <q-item-section avatar> </q-item-section>
                 <q-item-section>
                   <q-item-label>*鍛造機台即時狀態</q-item-label>
+                </q-item-section>
+              </q-item>
+              <q-item
+                :to="{ name: 'TVView' }"
+                active-class="q-item-no-link-highlighting"
+              >
+                <q-item-section avatar> </q-item-section>
+                <q-item-section>
+                  <q-item-label>*TV畫面</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
@@ -821,7 +823,6 @@
             <q-expansion-item
               switch-toggle-side
               dense-toggle
-              dense
               label="Today"
               :header-inset-level="1"
               :content-inset-level="2"
@@ -929,7 +930,7 @@ import EssentialLink from 'components/EssentialLink.vue'
 import Messages from 'components/Messages.vue'
 import { useQuasar } from 'quasar'
 
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, watch, reactive } from 'vue'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -945,22 +946,39 @@ export default defineComponent({
     console.log($q.platform)
 
     const link = ref('')
+    // const useDarkMode = ref(false)
 
     const leftDrawerOpen = ref(false)
+    const favorites = ref([{ id: 123, name: 999 }])
+
+    // watch(useDarkMode, (useDarkMode, prevuseDarkMode) => {
+    //   // console.log(useDarkMode)
+    //   $q.dark.toggle()
+    // })
 
     return {
       leftDrawerOpen,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value
       },
+      dynamicAddFav() {
+        console.log(typeof favorites.value)
+        // favorites.value = favorites.value.push({ id: 1, name: 123 })
+        favorites.value.push({ id: 1, name: 123 })
+      },
       link,
+      // useDarkMode,
+      favorites,
     }
   },
 })
 </script>
 
 <style lang="sass">
-// .q-item-no-link-highlighting
-//   color: white
-//   background: #F2C037
+.header_dark
+  background: $primary-dark
+.drawer-normal
+  background: $primary
+.drawerdark
+  background: $primary-dark
 </style>

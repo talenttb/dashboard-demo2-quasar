@@ -1,6 +1,8 @@
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, reactive } from 'vue'
+import { useQuasar } from 'quasar'
 
-export default function chart(chartRef) {
+export default function chart(chartRef, isDarkActive) {
+  const $q = useQuasar()
   var lastDate = 0
   var data = ref([])
   var TICKINTERVAL = 86400000
@@ -50,7 +52,9 @@ export default function chart(chartRef) {
     data.value = data.value.slice(data.value.length - 10, data.value.length)
   }
 
-  const chartOptions = ref({
+  // :class="$q.dark.isActive ? 'sub-title-dark' : 'sub-title-normal'"
+
+  const chartOptions = reactive({
     chart: {
       id: 'realtime',
       // height: 640,
@@ -68,6 +72,9 @@ export default function chart(chartRef) {
       zoom: {
         enabled: false,
       },
+    },
+    theme: {
+      mode: isDarkActive ? 'dark' : 'light',
     },
     dataLabels: {
       enabled: false,

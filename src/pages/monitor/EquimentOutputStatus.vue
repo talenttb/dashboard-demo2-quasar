@@ -1,10 +1,10 @@
 <template>
   <q-page padding style="padding-top: 66px">
-    <div class="q-pa-md">
+    <div class="q-pa-md" :class="$q.dark.isActive ? 'query-section--dark' : ''">
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-3">
           <q-card class="my-card q-ma-xs" @click="estimateClick">
-            <q-card-section class="bg-red text-white">
+            <q-card-section class="bg-negative text-white">
               <div class="text-h6 absolute-center">停機</div>
             </q-card-section>
             <q-list>
@@ -50,7 +50,7 @@
 
         <div class="col-xs-12 col-sm-6 col-md-3">
           <q-card class="my-card q-ma-xs" @click="estimateClick2">
-            <q-card-section class="bg-green text-white">
+            <q-card-section class="bg-positive text-white">
               <div class="text-h6 absolute-center">稼動</div>
             </q-card-section>
             <q-list>
@@ -96,7 +96,7 @@
 
         <div class="col-xs-12 col-sm-6 col-md-3">
           <q-card class="my-card q-ma-xs" @click="estimateClick3">
-            <q-card-section class="bg-green text-white">
+            <q-card-section class="bg-positive text-white">
               <div class="text-h6 absolute-center">稼動</div>
             </q-card-section>
             <q-list>
@@ -321,7 +321,10 @@
 
     <!-- place QPageSticky at end of page -->
     <q-page-sticky expand position="top">
-      <q-toolbar class="bg-light-blue-6 text-white">
+      <q-toolbar
+        class="text-white"
+        :class="$q.dark.isActive ? 'sub-title-dark' : 'sub-title-normal'"
+      >
         <q-avatar> </q-avatar>
         <q-toolbar-title>機台設備完工計量即時狀態表</q-toolbar-title>
       </q-toolbar>

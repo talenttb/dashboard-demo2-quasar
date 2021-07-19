@@ -26,80 +26,6 @@
             <q-card-actions align="center">
               <q-circular-progress
                 show-value
-                font-size="12px"
-                :value="70"
-                size="100px"
-                :thickness="0.22"
-                color="teal"
-                track-color="grey-3"
-                class="q-ma-md"
-              >
-                70%
-              </q-circular-progress>
-            </q-card-actions>
-          </q-card>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-3">
-          <q-card class="my-card q-ma-xs">
-            <q-card-section class="bg-green text-white">
-              <div class="text-h6 absolute-center">使用中</div>
-            </q-card-section>
-            <!-- <q-separator /> -->
-            <q-list dense>
-              <q-item>
-                <q-item-section avatar> 機台編號 </q-item-section>
-                <q-item-section> 95277 </q-item-section>
-              </q-item>
-              <q-item>
-                <q-item-section avatar> 產品事號 </q-item-section>
-                <q-item-section> 5209527 </q-item-section>
-              </q-item>
-              <q-item>
-                <q-item-section avatar> 品號 </q-item-section>
-                <q-item-section> AQQQ9988654 </q-item-section>
-              </q-item>
-            </q-list>
-
-            <q-card-actions align="center">
-              <q-circular-progress
-                show-value
-                font-size="12px"
-                :value="70"
-                size="100px"
-                :thickness="0.16"
-                color="teal"
-                track-color="grey-3"
-                class="q-ma-md"
-              >
-                70%
-              </q-circular-progress>
-            </q-card-actions>
-          </q-card>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-3">
-          <q-card class="my-card q-ma-xs">
-            <q-card-section class="bg-green text-white">
-              <div class="text-h6 absolute-center">使用中</div>
-            </q-card-section>
-            <!-- <q-separator /> -->
-            <q-list dense>
-              <q-item>
-                <q-item-section avatar> 機台編號 </q-item-section>
-                <q-item-section> 95277 </q-item-section>
-              </q-item>
-              <q-item>
-                <q-item-section avatar> 產品事號 </q-item-section>
-                <q-item-section> 5209527 </q-item-section>
-              </q-item>
-              <q-item>
-                <q-item-section avatar> 品號 </q-item-section>
-                <q-item-section> AQQQ9988654 </q-item-section>
-              </q-item>
-            </q-list>
-
-            <q-card-actions align="center">
-              <q-circular-progress
-                show-value
                 font-size="22px"
                 :value="70"
                 size="100px"
@@ -137,10 +63,10 @@
             <q-card-actions align="center">
               <q-circular-progress
                 show-value
-                font-size="12px"
+                font-size="24px"
                 :value="70"
                 size="100px"
-                :thickness="0.32"
+                :thickness="0.22"
                 color="teal"
                 track-color="grey-3"
                 class="q-ma-md"
@@ -151,20 +77,16 @@
           </q-card>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3">
-          <q-card
-            class="my-card q-ma-xs"
-            style="
-              border-style: double;
-              border-style: double;
-              border-width: thick;
-              border-color: green;
-            "
-          >
-            <q-card-section class="q-pa-none">
-              <div class="text-h6 text-center">機台編號 99161</div>
+          <q-card class="my-card q-ma-xs">
+            <q-card-section class="bg-green text-white">
+              <div class="text-h6 absolute-center">使用中</div>
             </q-card-section>
-            <q-separator />
-            <q-list>
+            <!-- <q-separator /> -->
+            <q-list dense>
+              <q-item>
+                <q-item-section avatar> 機台編號 </q-item-section>
+                <q-item-section> 95277 </q-item-section>
+              </q-item>
               <q-item>
                 <q-item-section avatar> 產品事號 </q-item-section>
                 <q-item-section> 5209527 </q-item-section>
@@ -178,9 +100,9 @@
             <q-card-actions align="center">
               <q-circular-progress
                 show-value
-                font-size="12px"
+                font-size="26px"
                 :value="70"
-                size="120px"
+                size="100px"
                 :thickness="0.22"
                 color="teal"
                 track-color="grey-3"
@@ -193,7 +115,44 @@
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3">
           <q-card class="my-card q-ma-xs">
-            <q-card-section class="bg-green text-white q-pa-none">
+            <q-card-section class="bg-green text-white">
+              <div class="text-h6 absolute-center">使用中</div>
+            </q-card-section>
+            <!-- <q-separator /> -->
+            <q-list dense>
+              <q-item>
+                <q-item-section avatar> 機台編號 </q-item-section>
+                <q-item-section> 95277 </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section avatar> 產品事號 </q-item-section>
+                <q-item-section> 5209527 </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section avatar> 品號 </q-item-section>
+                <q-item-section> AQQQ9988654 </q-item-section>
+              </q-item>
+            </q-list>
+
+            <q-card-actions align="center">
+              <q-circular-progress
+                show-value
+                font-size="28px"
+                :value="100"
+                size="100px"
+                :thickness="0.22"
+                color="teal"
+                track-color="grey-3"
+                class="q-ma-md"
+              >
+                100%
+              </q-circular-progress>
+            </q-card-actions>
+          </q-card>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <q-card class="my-card q-ma-xs">
+            <q-card-section class="bg-red-5 text-white q-pa-none">
               <div class="text-h6 text-center">使用中（95277）</div>
             </q-card-section>
 
@@ -211,15 +170,15 @@
             <q-card-actions align="center">
               <q-circular-progress
                 show-value
-                font-size="12px"
-                :value="70"
+                font-size="22px"
+                :value="99"
                 size="100px"
                 :thickness="0.22"
-                color="teal"
+                color="red-5"
                 track-color="grey-3"
                 class="q-ma-md"
               >
-                70%
+                99%
               </q-circular-progress>
             </q-card-actions>
 
@@ -238,7 +197,10 @@
 
     <!-- place QPageSticky at end of page -->
     <q-page-sticky expand position="top">
-      <q-toolbar class="bg-light-blue-6 text-white">
+      <q-toolbar
+        class="text-white"
+        :class="$q.dark.isActive ? 'sub-title-dark' : 'sub-title-normal'"
+      >
         <q-avatar> </q-avatar>
         <q-toolbar-title>鍛造機台稼動率</q-toolbar-title>
       </q-toolbar>

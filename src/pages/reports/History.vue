@@ -1,7 +1,9 @@
 <template>
   <!-- style="max-width: 300px" -->
   <q-page padding style="padding-top: 66px">
-    <div class="q-pa-md">
+    <!-- section--dark -->
+
+    <div class="q-pa-md" :class="$q.dark.isActive ? 'query-section--dark' : ''">
       <div class="row q-gutter-sm">
         <div class="col-xs-12 col-sm-6 col-md-2">
           <q-select
@@ -101,7 +103,6 @@
                     v-model="queryEndDate"
                     mask="YYYY-MM-DD HH:mm"
                     format24h
-                    :minute-options="[0, 15, 30, 45]"
                   >
                     <div class="row items-center justify-end">
                       <q-btn v-close-popup label="Close" color="primary" flat />
@@ -119,7 +120,16 @@
     </div>
 
     <div class="q-pa-md" v-show="showData">
-      <q-btn push color="secondary" label="折線圖" @click="changeLinearChart" />
+      <q-btn
+        push
+        color="secondary"
+        label="折線圖"
+        @click="
+          () => {
+            changeLinearChart($q.dark.isActive)
+          }
+        "
+      />
       <apexchart :options="chartOptions" :series="chartSeries"></apexchart>
     </div>
 
@@ -129,7 +139,10 @@
 
     <!-- place QPageSticky at end of page -->
     <q-page-sticky expand position="top">
-      <q-toolbar class="bg-light-blue-6 text-white">
+      <q-toolbar
+        class="text-white"
+        :class="$q.dark.isActive ? 'sub-title-dark' : 'sub-title-normal'"
+      >
         <q-avatar> </q-avatar>
         <q-toolbar-title>歷史資料查詢</q-toolbar-title>
       </q-toolbar>
@@ -138,7 +151,7 @@
 </template>
 
 <script>
-import { ref, reactive, isReactive, computed } from 'vue'
+import { ref, reactive, isReactive, computed, watch } from 'vue'
 import { api } from 'boot/axios'
 import { date, useQuasar } from 'quasar'
 import QuasarNotify from '../../libs/errorNotify'
@@ -173,16 +186,16 @@ export default {
       loadingAnimate.value = true
       showData.value = false
 
-      // queryMachRef.value.validate()
-      // if (queryMachRef.value.hasError) {
-      //   loadingAnimate.value = false
-      //   return
-      // }
-      // queryFieldRef.value.validate()
-      // if (queryFieldRef.value.hasError) {
-      //   loadingAnimate.value = false
-      //   return
-      // }
+      queryMachRef.value.validate()
+      if (queryMachRef.value.hasError) {
+        loadingAnimate.value = false
+        return
+      }
+      queryFieldRef.value.validate()
+      if (queryFieldRef.value.hasError) {
+        loadingAnimate.value = false
+        return
+      }
 
       // console.log(queryField.value)
       // console.log(queryMach.value)
@@ -200,7 +213,50 @@ export default {
       // console.table(response.data)
     }
 
-    const { chartOptions, chartSeries, changeLinearChart } = chart()
+    // isDarkActive
+    // const $q = useQuasar()
+    // console.log($q.dark.isActive)
+
+    const { chartOptions, chartSeries, changeLinearChart } = chart(
+      $q.dark.isActive
+    )
+
+    watch(
+      () => $q.dark.isActive,
+      (val) => {
+        console.log(val ? 'On dark mode' : 'On light mode')
+        const g = chart(val)
+        chartOptions.value = g.chartOptions.value
+        // chartOptions.value = g.chartOptions.value
+
+        // chartOptions
+        console.log(chartOptions.value.theme)
+        chartOptions.value = {
+          ...chartOptions.value,
+          ...{
+            theme: {
+              mode: val ? 'dark' : 'light',
+            },
+          },
+        }
+        // chartRef.value.updateOptions({
+        //   theme: {
+        //     mode: val ? 'dark' : 'light',
+        //   },
+        // })
+        // window.ApexCharts.exec('apexchartsrealtime', 'updateOptions', {
+        //   theme: {
+        //     mode: false ? 'dark' : 'light',
+        //   },
+        // })
+
+        // theme: {
+        //   mode: $q.dark.isActive ? 'dark' : 'light',
+        // },
+        chartOptions.value.theme.mode = val ? 'dark' : 'light'
+        console.log(chartOptions.value.theme)
+      }
+    )
 
     return {
       queryStartDate,
