@@ -880,7 +880,10 @@
                 </q-item-section>
               </q-item>
               <q-separator color="white" inset />
-              <q-item to="/Map" active-class="q-item-no-link-highlighting">
+              <q-item
+                :to="{ name: 'Maintenance' }"
+                active-class="q-item-no-link-highlighting"
+              >
                 <q-item-section avatar>
                   <q-icon
                     color="blue-grey-1"
@@ -889,7 +892,7 @@
                   ></q-icon>
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label>保養歷史記錄</q-item-label>
+                  <q-item-label>*保養歷史記錄</q-item-label>
                 </q-item-section>
               </q-item>
               <q-separator color="white" inset />

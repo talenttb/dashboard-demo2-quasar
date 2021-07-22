@@ -5,7 +5,7 @@ const beHost = 'http://localhost:3000'
 // const beHost = 'http://localhost:3000'
 const api = axios.create({ baseURL: beHost })
 
-const feHost = 'http://localhost:3000'
+const feHost = 'http://localhost:8080'
 // const feHost = 'https://98a7d740a4d5.ngrok.io'
 const selfResourceApi = axios.create({ baseURL: feHost })
 
