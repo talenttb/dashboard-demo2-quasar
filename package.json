@@ -10,7 +10,7 @@
     "dev": "npx quasar dev",
     "clean": "npx quasar clean",
     "build": "quasar build",
-    "fake-api": "npx json-server --watch data/db.json --routes data/routes.json",
+    "fake-api": "npx json-server --watch data/db.json --routes data/routes.json --config data/config.json",
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0"
   },

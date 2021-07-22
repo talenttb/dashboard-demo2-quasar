@@ -87,7 +87,7 @@
             </q-item-section>
           </q-item>
 
-          <!-- <q-expansion-item
+          <q-expansion-item
             icon="share_location"
             label="我的最愛"
             expand-icon-class="text-white"
@@ -100,18 +100,14 @@
                 active-class="q-item-no-link-highlighting"
               >
                 <q-item-section avatar>
-    <q-icon
-      color="blue-grey-1"
-      name="push_pin"
-      size="xs"
-    ></q-icon>
-  </q-item-section>
+                  <q-icon color="green-5" name="o_push_pin" size="xs"></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>{{ page.name }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
-          </q-expansion-item> -->
+          </q-expansion-item>
 
           <!-- <q-item
             to="/Cards"
@@ -1340,7 +1336,9 @@ export default defineComponent({
     // const useDarkMode = ref(false)
 
     const leftDrawerOpen = ref(false)
-    const favorites = ref([{ id: 123, name: 999 }])
+    const favorites = ref([])
+    favorites.value.push({ id: 1, name: 'TV畫面' })
+    favorites.value.push({ id: 2, name: '巡檢記錄即時連線' })
 
     // watch(useDarkMode, (useDarkMode, prevuseDarkMode) => {
     //   // console.log(useDarkMode)
@@ -1355,7 +1353,8 @@ export default defineComponent({
       dynamicAddFav() {
         console.log(typeof favorites.value)
         // favorites.value = favorites.value.push({ id: 1, name: 123 })
-        favorites.value.push({ id: 1, name: 123 })
+        // favorites.value.push({ id: 1, name: 'TV畫面' })
+        // favorites.value.push({ id: 2, name: '巡檢記錄即時連線' })
       },
       link,
       // useDarkMode,
