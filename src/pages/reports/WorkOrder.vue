@@ -25,7 +25,6 @@
         <q-btn push color="secondary" label="查詢" @click="loadData" />
       </div>
     </div>
-
     <div class="q-pa-md">
       <q-table
         :title="myTitle"

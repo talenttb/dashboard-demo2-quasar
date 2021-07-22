@@ -1,4 +1,4 @@
-import { ref, onMounted, computed, reactive } from 'vue'
+import { ref, onUnmounted, reactive } from 'vue'
 import { useQuasar } from 'quasar'
 
 export default function chart(chartRef, isDarkActive) {
@@ -74,6 +74,7 @@ export default function chart(chartRef, isDarkActive) {
       },
     },
     theme: {
+      // mode: 'dark',
       mode: isDarkActive ? 'dark' : 'light',
     },
     dataLabels: {
@@ -107,14 +108,20 @@ export default function chart(chartRef, isDarkActive) {
     },
   ])
 
+  let timeoutID
+  onUnmounted(() => {
+    console.log('onUnmounted ')
+    clearInterval(timeoutID)
+  })
+
   const loop = function () {
-    // var me = this
-    window.setInterval(function () {
+    timeoutID = window.setInterval(function () {
       // console.log(123)
       getNewSeries(lastDate, {
         min: 10,
         max: 90,
       })
+      // console.log(123123)
 
       // chartRef.chart.updateSeries([
       //   {

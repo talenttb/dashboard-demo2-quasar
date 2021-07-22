@@ -27,7 +27,8 @@ export default function chart(isDarkActive) {
   // console.log($q.dark.isActive)
   const chartOptions = ref({
     chart: {
-      height: 350,
+      // width: '60%',
+      // height: 150,
       type: 'line',
       zoom: {
         enabled: false,
@@ -44,10 +45,10 @@ export default function chart(isDarkActive) {
       curve: 'straight',
       dashArray: [0, 8, 5],
     },
-    title: {
-      text: '統計報表',
-      align: 'left',
-    },
+    // title: {
+    //   text: '統計報表',
+    //   align: 'left',
+    // },
     legend: {
       tooltipHoverFormatter: function (val, opts) {
         return (
@@ -112,15 +113,15 @@ export default function chart(isDarkActive) {
   const chartSeries = ref([
     {
       name: 'Session Duration',
-      data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10],
+      data: [45, 35, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10],
     },
     {
       name: 'Page Views',
-      data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35],
+      data: [35, 31, 42, 42, 13, 18, 29, 37, 36, 51, 32, 35],
     },
     {
       name: 'Total Visits',
-      data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47],
+      data: [13, 57, 44, 31, 55, 38, 42, 47, 66, 56, 45, 47],
     },
   ])
 

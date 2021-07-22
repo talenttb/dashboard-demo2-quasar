@@ -120,7 +120,7 @@
     </div>
 
     <div class="q-pa-md" v-show="showData">
-      <q-btn
+      <!-- <q-btn
         push
         color="secondary"
         label="折線圖"
@@ -129,8 +129,12 @@
             changeLinearChart($q.dark.isActive)
           }
         "
-      />
-      <apexchart :options="chartOptions" :series="chartSeries"></apexchart>
+      /> -->
+      <apexchart
+        :options="chartOptions"
+        :series="chartSeries"
+        height="330"
+      ></apexchart>
     </div>
 
     <q-inner-loading :showing="loadingAnimate">

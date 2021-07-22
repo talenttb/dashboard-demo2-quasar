@@ -150,7 +150,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
+import { ref, onUnmounted, onMounted } from 'vue'
 export default {
   name: 'Test',
   setup() {
@@ -170,9 +170,15 @@ export default {
       // window.addEventListener('resize', this.resizeHandler);
     })
 
+    onUnmounted(() => {
+      console.log('onUnmounted ')
+      clearInterval(timeoutID)
+    })
+
     var timeoutID = window.setInterval(() => {
       showing.value = !showing.value
       myText.value = myText.value.length > 10 ? '有人闖入' : `!${myText.value}!`
+      console.log(999)
     }, 1000)
 
     return {
