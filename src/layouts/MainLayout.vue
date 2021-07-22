@@ -15,11 +15,11 @@
             @click="toggleLeftDrawer"
           />
 
-          <q-btn dense label="test" aria-label="Menu" @click="dynamicAddFav" />
+          <!-- <q-btn dense label="test" aria-label="Menu" @click="dynamicAddFav" /> -->
 
-          <q-toolbar-title> Quasar App </q-toolbar-title>
-          <q-space />
-          <div>Quasar v{{ $q.version }}</div>
+          <q-toolbar-title style="min-width: 50%">
+            Smartist App
+          </q-toolbar-title>
           <q-space />
           <div class="q-gutter-sm row items-center no-wrap">
             <q-btn
@@ -87,8 +87,7 @@
             </q-item-section>
           </q-item>
 
-          <!-- 資源及計畫 -->
-          <q-expansion-item
+          <!-- <q-expansion-item
             icon="share_location"
             label="我的最愛"
             expand-icon-class="text-white"
@@ -100,13 +99,19 @@
                 to="/Map"
                 active-class="q-item-no-link-highlighting"
               >
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+    <q-icon
+      color="blue-grey-1"
+      name="push_pin"
+      size="xs"
+    ></q-icon>
+  </q-item-section>
                 <q-item-section>
                   <q-item-label>{{ page.name }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
-          </q-expansion-item>
+          </q-expansion-item> -->
 
           <!-- <q-item
             to="/Cards"
@@ -239,25 +244,54 @@
           >
             <q-list class="q-pl-lg">
               <q-expansion-item
+                dense-toggle
                 icon=""
                 label="MRP-物料需求計畫"
                 expand-icon-class="text-grey-5"
               >
                 <q-list>
-                  <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                  <q-item active-class="q-item-no-link-highlighting">
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
+                      <!-- BOM-物料清單 -->
                       <q-item-label>BOM-物料清單</q-item-label>
+                      <!-- <q-item
+                        to="/Map"
+                        active-class="q-item-no-link-highlighting"
+                        >BOM-物料清單</q-item
+                      > -->
                     </q-item-section>
                   </q-item>
+                  <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>存貨數量</q-item-label>
                     </q-item-section>
                   </q-item>
+
+                  <q-separator color="white" inset />
+
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon
+                    ></q-item-section>
                     <q-item-section>
                       <q-item-label>訂單</q-item-label>
                     </q-item-section>
@@ -273,13 +307,26 @@
               >
                 <q-list>
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon
+                    ></q-item-section>
                     <q-item-section>
                       <q-item-label>MPS-主生產計畫</q-item-label>
                     </q-item-section>
                   </q-item>
+                  <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar
+                      ><q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>BOM-物料清單</q-item-label>
                     </q-item-section>
@@ -295,25 +342,52 @@
               >
                 <q-list>
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar
+                      ><q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>產品清單（轉錄、上傳）</q-item-label>
                     </q-item-section>
                   </q-item>
+                  <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar
+                      ><q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>模具資料建檔</q-item-label>
                     </q-item-section>
                   </q-item>
+                  <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>產品模具對照表</q-item-label>
                     </q-item-section>
                   </q-item>
+                  <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon
+                    ></q-item-section>
                     <q-item-section>
                       <q-item-label>APS-先進規劃排程系統</q-item-label>
                     </q-item-section>
@@ -329,37 +403,78 @@
               >
                 <q-list>
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>庫存管理</q-item-label>
                     </q-item-section>
                   </q-item>
+                  <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>採購進貨管理</q-item-label>
                     </q-item-section>
                   </q-item>
+                  <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>訂單銷售管理</q-item-label>
                     </q-item-section>
                   </q-item>
+                  <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>進口作業系統</q-item-label>
                     </q-item-section>
                   </q-item>
+                  <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>出口作業管理系統</q-item-label>
                     </q-item-section>
                   </q-item>
+                  <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>傳輸系統</q-item-label>
                     </q-item-section>
@@ -375,31 +490,65 @@
               >
                 <q-list>
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>BOM-產品結構</q-item-label>
                     </q-item-section>
                   </q-item>
+                  <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>SFC-製程管理系統</q-item-label>
                     </q-item-section>
                   </q-item>
+                  <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>LRP-批次需求計畫</q-item-label>
                     </q-item-section>
                   </q-item>
+                  <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>製令管理</q-item-label>
                     </q-item-section>
                   </q-item>
+                  <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>MOC-託外加工管理</q-item-label>
                     </q-item-section>
@@ -422,23 +571,41 @@
                 label="MMS-物料管理系統"
                 expand-icon-class="text-grey-5"
               >
-                <q-list class="text-white shadow-5 rounded-borders">
+                <q-list class="text-white">
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>物料維護</q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>線邊倉物料管理</q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>生產過站自動扣料</q-item-label>
                     </q-item-section>
@@ -453,44 +620,80 @@
                 label="WIP-在製品管理系統"
                 expand-icon-class="text-grey-5"
               >
-                <q-list class="text-white shadow-5 rounded-borders">
+                <q-list class="text-white">
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>生產批追蹤</q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>生產查詢</q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>生產工作指示</q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>工單進出站管理</q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar
+                      ><q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>訂單轉錄</q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>製令轉錄</q-item-label>
                     </q-item-section>
@@ -505,23 +708,41 @@
                 label="LMS-標籤管理系統"
                 expand-icon-class="text-grey-5"
               >
-                <q-list class="text-white shadow-5 rounded-borders">
+                <q-list class="text-white">
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>欄位客製化</q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>標籤關聯設定</q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>出貨追蹤</q-item-label>
                     </q-item-section>
@@ -536,9 +757,15 @@
                 label="Tool-零配件管理"
                 expand-icon-class="text-grey-5"
               >
-                <q-list class="text-white shadow-5 rounded-borders">
+                <q-list class="text-white">
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>零配件進出與庫存管理</q-item-label>
                     </q-item-section>
@@ -553,23 +780,41 @@
                 label="CMS-載具管理"
                 expand-icon-class="text-grey-5"
               >
-                <q-list class="text-white shadow-5 rounded-borders">
+                <q-list class="text-white">
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>物料維護</q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>線邊倉物料管理</q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>生產過站自動扣料</q-item-label>
                     </q-item-section>
@@ -584,16 +829,28 @@
                 label="ALM-警示管理"
                 expand-icon-class="text-grey-5"
               >
-                <q-list class="text-white shadow-5 rounded-borders">
+                <q-list class="text-white">
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>通知平台設定</q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-separator color="white" inset />
                   <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                    <q-item-section avatar> </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon
+                        color="blue-grey-1"
+                        name="push_pin"
+                        size="xs"
+                      ></q-icon>
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>警報設定</q-item-label>
                     </q-item-section>
@@ -609,21 +866,41 @@
             label="設備"
             expand-icon-class="text-white"
           >
-            <q-list class="q-pl-lg text-white shadow-5 rounded-borders">
+            <q-list class="q-pl-lg text-white">
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>保養週期設定</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="white" inset />
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>保養歷史記錄</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="white" inset />
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>配件工具整合</q-item-label>
                 </q-item-section>
@@ -642,13 +919,26 @@
                 :to="{ name: 'Inspection' }"
                 active-class="q-item-no-link-highlighting"
               >
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>*巡檢記錄即時連線</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="white" inset />
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>AQL、Sampling Size...</q-item-label>
                 </q-item-section>
@@ -667,46 +957,87 @@
                 :to="{ name: 'EquimentOutputStatus' }"
                 active-class="q-item-no-link-highlighting"
               >
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>*機台設備完工計量即時狀態表</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="white" inset />
               <q-item
                 :to="{ name: 'ForgingMachineActivationRate' }"
                 active-class="q-item-no-link-highlighting"
               >
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>*鍛造機台稼動率</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="white" inset />
               <q-item
                 :to="{ name: 'ForgingMachineCurrentStatus' }"
                 active-class="q-item-no-link-highlighting"
               >
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>*鍛造機台即時狀態</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="white" inset />
               <q-item
                 :to="{ name: 'TVView' }"
                 active-class="q-item-no-link-highlighting"
               >
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>*TV畫面</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="white" inset />
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>SOP/SIP/生產指示即時線上檢視</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="white" inset />
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>各項即時數據監控列表</q-item-label>
                 </q-item-section>
@@ -725,43 +1056,84 @@
                 to="/reports/moulds"
                 active-class="q-item-no-link-highlighting"
               >
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>*模具報表</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="white" inset />
               <q-item
                 :to="{ name: 'History' }"
                 active-class="q-item-no-link-highlighting"
               >
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>*歷史資料查詢</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="white" inset />
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>生產履歷資料</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="white" inset />
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>設備OEE報表</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="white" inset />
               <q-item
                 :to="{ name: 'WorkOrder' }"
                 active-class="q-item-no-link-highlighting"
               >
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>*工單日報</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="white" inset />
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>鍛造機台操作歷程記錄</q-item-label>
                 </q-item-section>
@@ -795,19 +1167,39 @@
           >
             <q-list class="q-pl-lg">
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>人員管理</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="white" inset />
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>群組權限管理</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="white" inset />
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
-                <q-item-section avatar> </q-item-section>
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                  ></q-icon>
+                </q-item-section>
                 <q-item-section>
                   <q-item-label>上班工時設定</q-item-label>
                 </q-item-section>
@@ -815,13 +1207,12 @@
             </q-list>
           </q-expansion-item>
 
-          <q-expansion-item
+          <!-- <q-expansion-item
             icon=""
             label="Sample Sytle"
             expand-icon-class="text-white"
           >
             <q-expansion-item
-              switch-toggle-side
               dense-toggle
               label="Today"
               :header-inset-level="1"
@@ -837,7 +1228,6 @@
               </q-card>
             </q-expansion-item>
             <q-expansion-item
-              switch-toggle-side
               label="Today"
               :header-inset-level="1"
             >
@@ -914,7 +1304,7 @@
                 </q-card>
               </q-expansion-item>
             </q-list>
-          </q-expansion-item>
+          </q-expansion-item> -->
         </q-list>
       </q-drawer>
 
@@ -944,6 +1334,7 @@ export default defineComponent({
     const $q = useQuasar()
 
     console.log($q.platform)
+    console.log($q.version)
 
     const link = ref('')
     // const useDarkMode = ref(false)
@@ -974,11 +1365,16 @@ export default defineComponent({
 })
 </script>
 
-<style lang="sass">
-.header_dark
-  background: $primary-dark
-.drawer-normal
-  background: $primary
-.drawerdark
-  background: $primary-dark
+<style lang="scss">
+.header_dark {
+  // background: $primary-dark
+  background: $primary-dark linear-gradient(1deg, #1d324a 50%, #2b7e7ecc);
+}
+
+.drawer-normal {
+  background: $primary;
+}
+.drawerdark {
+  background: $primary-dark;
+}
 </style>
