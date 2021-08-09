@@ -12,6 +12,7 @@ const routes = [
       { path: '/Cards', component: () => import('pages/Cards.vue') },
       { path: '/Charts', component: () => import('pages/Charts.vue') },
       {
+        name: 'Moulds',
         path: '/reports/moulds',
         component: () => import('pages/reports/Mould.vue'),
       },
@@ -24,6 +25,11 @@ const routes = [
         name: 'History',
         path: '/reports/History',
         component: () => import('pages/reports/History.vue'),
+      },
+      {
+        name: 'Traceability',
+        path: '/reports/traceability',
+        component: () => import('pages/reports/Traceability.vue'),
       },
       {
         name: 'Inspection',

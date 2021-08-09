@@ -15,8 +15,6 @@
             @click="toggleLeftDrawer"
           />
 
-          <!-- <q-btn dense label="test" aria-label="Menu" @click="dynamicAddFav" /> -->
-
           <q-toolbar-title style="min-width: 50%">
             Smartist App
           </q-toolbar-title>
@@ -95,12 +93,21 @@
             <q-list>
               <q-item
                 v-for="page in favorites"
-                :key="page.id"
-                to="/Map"
+                :key="page.name"
+                :to="page.route"
                 active-class="q-item-no-link-highlighting"
               >
                 <q-item-section avatar>
-                  <q-icon color="green-5" name="o_push_pin" size="xs"></q-icon>
+                  <q-icon
+                    color="green-5"
+                    name="o_push_pin"
+                    size="xs"
+                    @click.prevent="
+                      (e) => {
+                        removeFav(e, page.name)
+                      }
+                    "
+                  ></q-icon>
                 </q-item-section>
                 <q-item-section>
                   <q-item-label>{{ page.name }}</q-item-label>
@@ -885,6 +892,13 @@
                     color="blue-grey-1"
                     name="push_pin"
                     size="xs"
+                    @click.prevent="
+                      (e) => {
+                        showProfile(e, '保養歷史記錄', {
+                          name: 'Maintenance',
+                        })
+                      }
+                    "
                   ></q-icon>
                 </q-item-section>
                 <q-item-section>
@@ -923,6 +937,13 @@
                     color="blue-grey-1"
                     name="push_pin"
                     size="xs"
+                    @click.prevent="
+                      (e) => {
+                        showProfile(e, '巡檢記錄即時連線', {
+                          name: 'Inspection',
+                        })
+                      }
+                    "
                   ></q-icon>
                 </q-item-section>
                 <q-item-section>
@@ -961,6 +982,13 @@
                     color="blue-grey-1"
                     name="push_pin"
                     size="xs"
+                    @click.prevent="
+                      (e) => {
+                        showProfile(e, '機台設備完工計量即時狀態表', {
+                          name: 'EquimentOutputStatus',
+                        })
+                      }
+                    "
                   ></q-icon>
                 </q-item-section>
                 <q-item-section>
@@ -977,6 +1005,13 @@
                     color="blue-grey-1"
                     name="push_pin"
                     size="xs"
+                    @click.prevent="
+                      (e) => {
+                        showProfile(e, '鍛造機台稼動率', {
+                          name: 'ForgingMachineActivationRate',
+                        })
+                      }
+                    "
                   ></q-icon>
                 </q-item-section>
                 <q-item-section>
@@ -993,6 +1028,13 @@
                     color="blue-grey-1"
                     name="push_pin"
                     size="xs"
+                    @click.prevent="
+                      (e) => {
+                        showProfile(e, '鍛造機台即時狀態', {
+                          name: 'ForgingMachineCurrentStatus',
+                        })
+                      }
+                    "
                   ></q-icon>
                 </q-item-section>
                 <q-item-section>
@@ -1009,6 +1051,13 @@
                     color="blue-grey-1"
                     name="push_pin"
                     size="xs"
+                    @click.prevent="
+                      (e) => {
+                        showProfile(e, 'TV畫面', {
+                          name: 'TVView',
+                        })
+                      }
+                    "
                   ></q-icon>
                 </q-item-section>
                 <q-item-section>
@@ -1052,7 +1101,7 @@
           >
             <q-list class="q-pl-lg">
               <q-item
-                to="/reports/moulds"
+                :to="{ name: 'Moulds' }"
                 active-class="q-item-no-link-highlighting"
               >
                 <q-item-section avatar>
@@ -1060,6 +1109,13 @@
                     color="blue-grey-1"
                     name="push_pin"
                     size="xs"
+                    @click.prevent="
+                      (e) => {
+                        showProfile(e, '模具報表', {
+                          name: 'Moulds',
+                        })
+                      }
+                    "
                   ></q-icon>
                 </q-item-section>
                 <q-item-section>
@@ -1076,6 +1132,13 @@
                     color="blue-grey-1"
                     name="push_pin"
                     size="xs"
+                    @click.prevent="
+                      (e) => {
+                        showProfile(e, '歷史資料查詢', {
+                          name: 'History',
+                        })
+                      }
+                    "
                   ></q-icon>
                 </q-item-section>
                 <q-item-section>
@@ -1083,16 +1146,27 @@
                 </q-item-section>
               </q-item>
               <q-separator color="white" inset />
-              <q-item to="/Map" active-class="q-item-no-link-highlighting">
+
+              <q-item
+                :to="{ name: 'Traceability' }"
+                active-class="q-item-no-link-highlighting"
+              >
                 <q-item-section avatar>
                   <q-icon
                     color="blue-grey-1"
                     name="push_pin"
                     size="xs"
+                    @click.prevent="
+                      (e) => {
+                        showProfile(e, '生產履歷資料', {
+                          name: 'Traceability',
+                        })
+                      }
+                    "
                   ></q-icon>
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label>生產履歷資料</q-item-label>
+                  <q-item-label>*生產履歷資料</q-item-label>
                 </q-item-section>
               </q-item>
               <q-separator color="white" inset />
@@ -1118,6 +1192,13 @@
                     color="blue-grey-1"
                     name="push_pin"
                     size="xs"
+                    @click.prevent="
+                      (e) => {
+                        showProfile(e, '模具工單日報報表', {
+                          name: 'WorkOrder',
+                        })
+                      }
+                    "
                   ></q-icon>
                 </q-item-section>
                 <q-item-section>
@@ -1340,8 +1421,6 @@ export default defineComponent({
 
     const leftDrawerOpen = ref(false)
     const favorites = ref([])
-    favorites.value.push({ id: 1, name: 'TV畫面' })
-    favorites.value.push({ id: 2, name: '巡檢記錄即時連線' })
 
     // watch(useDarkMode, (useDarkMode, prevuseDarkMode) => {
     //   // console.log(useDarkMode)
@@ -1350,17 +1429,26 @@ export default defineComponent({
 
     return {
       leftDrawerOpen,
+      showProfile(e, name, route) {
+        favorites.value.push({
+          name: name,
+          route: route,
+        })
+        $q.notify({
+          position: 'top-left',
+          type: 'positive',
+          message: '已加入我的最愛',
+        })
+      },
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value
       },
-      dynamicAddFav() {
-        console.log(typeof favorites.value)
-        // favorites.value = favorites.value.push({ id: 1, name: 123 })
-        // favorites.value.push({ id: 1, name: 'TV畫面' })
-        // favorites.value.push({ id: 2, name: '巡檢記錄即時連線' })
+      removeFav(e, name) {
+        favorites.value = favorites.value.filter(function (ele) {
+          return ele.name !== name
+        })
       },
       link,
-      // useDarkMode,
       favorites,
     }
   },
