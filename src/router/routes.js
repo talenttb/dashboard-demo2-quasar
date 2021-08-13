@@ -59,6 +59,11 @@ const routes = [
         component: () => import('pages/monitor/TVView.vue'),
       },
       {
+        name: 'MachineStatusMonitor',
+        path: '/monitor/machine-status',
+        component: () => import('pages/monitor/MachineStatusMonitor.vue'),
+      },
+      {
         name: 'Maintenance',
         path: '/equipment/maintenance',
         component: () => import('pages/equipment/Maintenance.vue'),

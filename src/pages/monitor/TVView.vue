@@ -12,6 +12,7 @@
       <q-tab name="machines" label="設備稼動率" />
       <q-tab name="orders" label="工單狀況" />
       <q-tab name="realtime_infos" label="工廠即時資訊" />
+      <q-tab name="envs" label="環境值" />
     </q-tabs>
 
     <q-separator />
@@ -703,6 +704,8 @@
         <TabRealtime></TabRealtime>
       </q-tab-panel>
 
+      <q-tab-panel name="envs"> <TabEnvs></TabEnvs> </q-tab-panel>
+
       <q-tab-panel name="mails" class="q-pa-none">
         <q-splitter v-model="splitterModel" style="height: 250px">
           <template v-slot:before>
@@ -856,6 +859,7 @@ import VueApexCharts from 'vue3-apexcharts'
 import TabMachines from 'components/monitor/tvview/TabMachines.vue'
 import TabOrders from 'components/monitor/tvview/TabOrders.vue'
 import TabRealtime from 'components/monitor/tvview/TabRealtime.vue'
+import TabEnvs from 'components/monitor/tvview/TabEnvs.vue'
 import chart from '@/composables/monitor/forging-machine-current-status/chart'
 
 export default {
@@ -865,13 +869,14 @@ export default {
     TabMachines,
     TabOrders,
     TabRealtime,
+    TabEnvs,
   },
   setup() {
     const $q = useQuasar()
 
     const loadingAnimate = ref(false)
     const showData = ref(false)
-    const tab = ref('orders')
+    const tab = ref('envs')
     const chartRef = ref(null)
 
     const loadData = async () => {

@@ -1078,16 +1078,27 @@
                 </q-item-section>
               </q-item>
               <q-separator color="white" inset />
-              <q-item to="/Map" active-class="q-item-no-link-highlighting">
+
+              <q-item
+                :to="{ name: 'MachineStatusMonitor' }"
+                active-class="q-item-no-link-highlighting"
+              >
                 <q-item-section avatar>
                   <q-icon
                     color="blue-grey-1"
                     name="push_pin"
                     size="xs"
+                    @click.prevent="
+                      (e) => {
+                        showProfile(e, '各項即時數據監控列表', {
+                          name: 'MachineStatusMonitor',
+                        })
+                      }
+                    "
                   ></q-icon>
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label>各項即時數據監控列表</q-item-label>
+                  <q-item-label>*各項即時數據監控列表</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
