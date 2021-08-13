@@ -3,7 +3,7 @@
     <q-layout view="lHh Lpr lFf">
       <q-header
         elevated
-        :class="$q.dark.isActive ? 'header_dark' : 'header_normal'"
+        :class="$q.dark.isActive ? 'header-dark' : 'header-normal'"
       >
         <q-toolbar>
           <q-btn
@@ -1456,7 +1456,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.header_dark {
+.header-dark {
   // background: $primary-dark
   background: $primary-dark linear-gradient(1deg, #1d324a 50%, #2b7e7ecc);
 }

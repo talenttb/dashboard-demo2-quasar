@@ -2,7 +2,7 @@
   "name": "dashboard-demo2-quasar",
   "version": "0.0.1",
   "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "productName": "Smartist App",
   "author": "Liyu <talenttb18@gmail.com>",
   "private": true,
   "scripts": {
