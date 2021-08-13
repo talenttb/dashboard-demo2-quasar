@@ -17,9 +17,9 @@ const routes = [
         component: () => import('pages/reports/Mould.vue'),
       },
       {
-        name: 'WorkOrder',
-        path: '/reports/WorkOrder',
-        component: () => import('pages/reports/WorkOrder.vue'),
+        name: 'WorkOrderDairy',
+        path: '/reports/work-order-dairy',
+        component: () => import('pages/reports/WorkOrderDairy.vue'),
       },
       {
         name: 'History',
@@ -30,6 +30,11 @@ const routes = [
         name: 'Traceability',
         path: '/reports/traceability',
         component: () => import('pages/reports/Traceability.vue'),
+      },
+      {
+        name: 'WorkOrderMachEffective',
+        path: '/reports/mach-effective',
+        component: () => import('pages/reports/WorkOrderMachEffective.vue'),
       },
       {
         name: 'Inspection',

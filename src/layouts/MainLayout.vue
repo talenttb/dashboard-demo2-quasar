@@ -1195,7 +1195,7 @@
               </q-item>
               <q-separator color="white" inset />
               <q-item
-                :to="{ name: 'WorkOrder' }"
+                :to="{ name: 'WorkOrderDairy' }"
                 active-class="q-item-no-link-highlighting"
               >
                 <q-item-section avatar>
@@ -1206,7 +1206,7 @@
                     @click.prevent="
                       (e) => {
                         showProfile(e, '模具工單日報報表', {
-                          name: 'WorkOrder',
+                          name: 'WorkOrderDairy',
                         })
                       }
                     "
@@ -1214,6 +1214,29 @@
                 </q-item-section>
                 <q-item-section>
                   <q-item-label>*工單日報</q-item-label>
+                </q-item-section>
+              </q-item>
+              <q-separator color="white" inset />
+              <q-item
+                :to="{ name: 'WorkOrderMachEffective' }"
+                active-class="q-item-no-link-highlighting"
+              >
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                    @click.prevent="
+                      (e) => {
+                        showProfile(e, '工單效率查詢', {
+                          name: 'WorkOrderMachEffective',
+                        })
+                      }
+                    "
+                  ></q-icon>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>*工單效率查詢</q-item-label>
                 </q-item-section>
               </q-item>
               <q-separator color="white" inset />

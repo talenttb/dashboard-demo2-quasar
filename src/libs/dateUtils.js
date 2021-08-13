@@ -6,4 +6,12 @@ function minute2DHM(minutes) {
   return `${day}${hour}${min}`
 }
 
-export { minute2DHM }
+import { date } from 'quasar'
+
+function date2Str(dt) {
+  const timeStamp = +new Date(dt)
+  const ret = date.formatDate(timeStamp, 'YYYY-MM-DD HH:mm')
+  return ret
+}
+
+export { minute2DHM, date2Str }
