@@ -1,0 +1,1130 @@
+"""The root query type which gives access points into the data universe."""
+type Query implements Node {
+  """
+  Exposes the root query type nested one level down. This is helpful for Relay 1
+  which can only query top level fields if they are in a particular form.
+  """
+  query: Query!
+
+  """
+  The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`.
+  """
+  nodeId: ID!
+
+  """Fetches an object given its globally unique `ID`."""
+  node(
+    """The globally unique `ID`."""
+    nodeId: ID!
+  ): Node
+
+  """Reads and enables pagination through a set of `Account`."""
+  accounts(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Account`."""
+    orderBy: [AccountsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AccountCondition
+  ): AccountsConnection
+
+  """Reads and enables pagination through a set of `CoreEmployee`."""
+  coreEmployees(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `CoreEmployee`."""
+    orderBy: [CoreEmployeesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: CoreEmployeeCondition
+  ): CoreEmployeesConnection
+
+  """Reads and enables pagination through a set of `CoreUser`."""
+  coreUsers(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `CoreUser`."""
+    orderBy: [CoreUsersOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: CoreUserCondition
+  ): CoreUsersConnection
+  account(id: BigInt!): Account
+  accountByUserName(userName: String!): Account
+  coreEmployee(id: BigInt!): CoreEmployee
+  coreEmployeeByUserId(userId: Int!): CoreEmployee
+  coreUser(id: BigInt!): CoreUser
+  coreUserByEmail(email: String!): CoreUser
+
+  """Reads a single `Account` using its globally unique `ID`."""
+  accountByNodeId(
+    """The globally unique `ID` to be used in selecting a single `Account`."""
+    nodeId: ID!
+  ): Account
+
+  """Reads a single `CoreEmployee` using its globally unique `ID`."""
+  coreEmployeeByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `CoreEmployee`.
+    """
+    nodeId: ID!
+  ): CoreEmployee
+
+  """Reads a single `CoreUser` using its globally unique `ID`."""
+  coreUserByNodeId(
+    """The globally unique `ID` to be used in selecting a single `CoreUser`."""
+    nodeId: ID!
+  ): CoreUser
+}
+
+"""An object with a globally unique `ID`."""
+interface Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+}
+
+"""A connection to a list of `Account` values."""
+type AccountsConnection {
+  """A list of `Account` objects."""
+  nodes: [Account!]!
+
+  """
+  A list of edges which contains the `Account` and cursor to aid in pagination.
+  """
+  edges: [AccountsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Account` you could get from the connection."""
+  totalCount: Int!
+}
+
+type Account implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: BigInt!
+  passwordHash: String
+  userName: String!
+  userRole: String!
+  isAdmin: Boolean!
+}
+
+"""
+A signed eight-byte integer. The upper big integer values are greater than the
+max value for a JavaScript number. Therefore all big integers will be output as
+strings and not numbers.
+"""
+scalar BigInt
+
+"""A `Account` edge in the connection."""
+type AccountsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Account` at the end of the edge."""
+  node: Account!
+}
+
+"""A location in a connection that can be used for resuming pagination."""
+scalar Cursor
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: Cursor
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: Cursor
+}
+
+"""Methods to use when ordering `Account`."""
+enum AccountsOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  USER_NAME_ASC
+  USER_NAME_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `Account` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input AccountCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: BigInt
+
+  """Checks for equality with the object’s `userName` field."""
+  userName: String
+}
+
+"""A connection to a list of `CoreEmployee` values."""
+type CoreEmployeesConnection {
+  """A list of `CoreEmployee` objects."""
+  nodes: [CoreEmployee!]!
+
+  """
+  A list of edges which contains the `CoreEmployee` and cursor to aid in pagination.
+  """
+  edges: [CoreEmployeesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `CoreEmployee` you could get from the connection."""
+  totalCount: Int!
+}
+
+type CoreEmployee implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: BigInt!
+  familyName: String!
+  givenName: String!
+  userId: Int
+
+  """Reads a single `CoreUser` that is related to this `CoreEmployee`."""
+  user: CoreUser
+}
+
+type CoreUser implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: BigInt!
+  passwordHash: String
+  email: String!
+  userName: String!
+  userRole: String
+  isAdmin: Boolean
+
+  """Reads a single `CoreEmployee` that is related to this `CoreUser`."""
+  coreEmployeeByUserId: CoreEmployee
+}
+
+"""A `CoreEmployee` edge in the connection."""
+type CoreEmployeesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `CoreEmployee` at the end of the edge."""
+  node: CoreEmployee!
+}
+
+"""Methods to use when ordering `CoreEmployee`."""
+enum CoreEmployeesOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  USER_ID_ASC
+  USER_ID_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `CoreEmployee` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input CoreEmployeeCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: BigInt
+
+  """Checks for equality with the object’s `userId` field."""
+  userId: Int
+}
+
+"""A connection to a list of `CoreUser` values."""
+type CoreUsersConnection {
+  """A list of `CoreUser` objects."""
+  nodes: [CoreUser!]!
+
+  """
+  A list of edges which contains the `CoreUser` and cursor to aid in pagination.
+  """
+  edges: [CoreUsersEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `CoreUser` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `CoreUser` edge in the connection."""
+type CoreUsersEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `CoreUser` at the end of the edge."""
+  node: CoreUser!
+}
+
+"""Methods to use when ordering `CoreUser`."""
+enum CoreUsersOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  EMAIL_ASC
+  EMAIL_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `CoreUser` object types. All fields are tested
+for equality and combined with a logical ‘and.’
+"""
+input CoreUserCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: BigInt
+
+  """Checks for equality with the object’s `email` field."""
+  email: String
+}
+
+"""
+The root mutation type which contains root level fields which mutate data.
+"""
+type Mutation {
+  """Creates a single `Account`."""
+  createAccount(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateAccountInput!
+  ): CreateAccountPayload
+
+  """Creates a single `CoreEmployee`."""
+  createCoreEmployee(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateCoreEmployeeInput!
+  ): CreateCoreEmployeePayload
+
+  """Creates a single `CoreUser`."""
+  createCoreUser(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateCoreUserInput!
+  ): CreateCoreUserPayload
+
+  """Updates a single `Account` using its globally unique id and a patch."""
+  updateAccountByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateAccountByNodeIdInput!
+  ): UpdateAccountPayload
+
+  """Updates a single `Account` using a unique key and a patch."""
+  updateAccount(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateAccountInput!
+  ): UpdateAccountPayload
+
+  """Updates a single `Account` using a unique key and a patch."""
+  updateAccountByUserName(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateAccountByUserNameInput!
+  ): UpdateAccountPayload
+
+  """
+  Updates a single `CoreEmployee` using its globally unique id and a patch.
+  """
+  updateCoreEmployeeByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateCoreEmployeeByNodeIdInput!
+  ): UpdateCoreEmployeePayload
+
+  """Updates a single `CoreEmployee` using a unique key and a patch."""
+  updateCoreEmployee(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateCoreEmployeeInput!
+  ): UpdateCoreEmployeePayload
+
+  """Updates a single `CoreEmployee` using a unique key and a patch."""
+  updateCoreEmployeeByUserId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateCoreEmployeeByUserIdInput!
+  ): UpdateCoreEmployeePayload
+
+  """Updates a single `CoreUser` using its globally unique id and a patch."""
+  updateCoreUserByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateCoreUserByNodeIdInput!
+  ): UpdateCoreUserPayload
+
+  """Updates a single `CoreUser` using a unique key and a patch."""
+  updateCoreUser(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateCoreUserInput!
+  ): UpdateCoreUserPayload
+
+  """Updates a single `CoreUser` using a unique key and a patch."""
+  updateCoreUserByEmail(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateCoreUserByEmailInput!
+  ): UpdateCoreUserPayload
+
+  """Deletes a single `Account` using its globally unique id."""
+  deleteAccountByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteAccountByNodeIdInput!
+  ): DeleteAccountPayload
+
+  """Deletes a single `Account` using a unique key."""
+  deleteAccount(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteAccountInput!
+  ): DeleteAccountPayload
+
+  """Deletes a single `Account` using a unique key."""
+  deleteAccountByUserName(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteAccountByUserNameInput!
+  ): DeleteAccountPayload
+
+  """Deletes a single `CoreEmployee` using its globally unique id."""
+  deleteCoreEmployeeByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteCoreEmployeeByNodeIdInput!
+  ): DeleteCoreEmployeePayload
+
+  """Deletes a single `CoreEmployee` using a unique key."""
+  deleteCoreEmployee(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteCoreEmployeeInput!
+  ): DeleteCoreEmployeePayload
+
+  """Deletes a single `CoreEmployee` using a unique key."""
+  deleteCoreEmployeeByUserId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteCoreEmployeeByUserIdInput!
+  ): DeleteCoreEmployeePayload
+
+  """Deletes a single `CoreUser` using its globally unique id."""
+  deleteCoreUserByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteCoreUserByNodeIdInput!
+  ): DeleteCoreUserPayload
+
+  """Deletes a single `CoreUser` using a unique key."""
+  deleteCoreUser(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteCoreUserInput!
+  ): DeleteCoreUserPayload
+
+  """Deletes a single `CoreUser` using a unique key."""
+  deleteCoreUserByEmail(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteCoreUserByEmailInput!
+  ): DeleteCoreUserPayload
+  authenticate(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: AuthenticateInput!
+  ): AuthenticatePayload
+}
+
+"""The output of our create `Account` mutation."""
+type CreateAccountPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Account` that was created by this mutation."""
+  account: Account
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Account`. May be used by Relay 1."""
+  accountEdge(
+    """The method to use when ordering `Account`."""
+    orderBy: [AccountsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AccountsEdge
+}
+
+"""All input for the create `Account` mutation."""
+input CreateAccountInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Account` to be created by this mutation."""
+  account: AccountInput!
+}
+
+"""An input for mutations affecting `Account`"""
+input AccountInput {
+  id: BigInt
+  passwordHash: String
+  userName: String!
+  userRole: String!
+  isAdmin: Boolean!
+}
+
+"""The output of our create `CoreEmployee` mutation."""
+type CreateCoreEmployeePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `CoreEmployee` that was created by this mutation."""
+  coreEmployee: CoreEmployee
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `CoreUser` that is related to this `CoreEmployee`."""
+  user: CoreUser
+
+  """An edge for our `CoreEmployee`. May be used by Relay 1."""
+  coreEmployeeEdge(
+    """The method to use when ordering `CoreEmployee`."""
+    orderBy: [CoreEmployeesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CoreEmployeesEdge
+}
+
+"""All input for the create `CoreEmployee` mutation."""
+input CreateCoreEmployeeInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `CoreEmployee` to be created by this mutation."""
+  coreEmployee: CoreEmployeeInput!
+}
+
+"""An input for mutations affecting `CoreEmployee`"""
+input CoreEmployeeInput {
+  id: BigInt
+  familyName: String!
+  givenName: String!
+  userId: Int
+}
+
+"""The output of our create `CoreUser` mutation."""
+type CreateCoreUserPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `CoreUser` that was created by this mutation."""
+  coreUser: CoreUser
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `CoreUser`. May be used by Relay 1."""
+  coreUserEdge(
+    """The method to use when ordering `CoreUser`."""
+    orderBy: [CoreUsersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CoreUsersEdge
+}
+
+"""All input for the create `CoreUser` mutation."""
+input CreateCoreUserInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `CoreUser` to be created by this mutation."""
+  coreUser: CoreUserInput!
+}
+
+"""An input for mutations affecting `CoreUser`"""
+input CoreUserInput {
+  id: BigInt
+  passwordHash: String
+  email: String!
+  userName: String!
+  userRole: String
+  isAdmin: Boolean
+}
+
+"""The output of our update `Account` mutation."""
+type UpdateAccountPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Account` that was updated by this mutation."""
+  account: Account
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Account`. May be used by Relay 1."""
+  accountEdge(
+    """The method to use when ordering `Account`."""
+    orderBy: [AccountsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AccountsEdge
+}
+
+"""All input for the `updateAccountByNodeId` mutation."""
+input UpdateAccountByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Account` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Account` being updated.
+  """
+  patch: AccountPatch!
+}
+
+"""
+Represents an update to a `Account`. Fields that are set will be updated.
+"""
+input AccountPatch {
+  id: BigInt
+  passwordHash: String
+  userName: String
+  userRole: String
+  isAdmin: Boolean
+}
+
+"""All input for the `updateAccount` mutation."""
+input UpdateAccountInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Account` being updated.
+  """
+  patch: AccountPatch!
+  id: BigInt!
+}
+
+"""All input for the `updateAccountByUserName` mutation."""
+input UpdateAccountByUserNameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Account` being updated.
+  """
+  patch: AccountPatch!
+  userName: String!
+}
+
+"""The output of our update `CoreEmployee` mutation."""
+type UpdateCoreEmployeePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `CoreEmployee` that was updated by this mutation."""
+  coreEmployee: CoreEmployee
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `CoreUser` that is related to this `CoreEmployee`."""
+  user: CoreUser
+
+  """An edge for our `CoreEmployee`. May be used by Relay 1."""
+  coreEmployeeEdge(
+    """The method to use when ordering `CoreEmployee`."""
+    orderBy: [CoreEmployeesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CoreEmployeesEdge
+}
+
+"""All input for the `updateCoreEmployeeByNodeId` mutation."""
+input UpdateCoreEmployeeByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `CoreEmployee` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `CoreEmployee` being updated.
+  """
+  patch: CoreEmployeePatch!
+}
+
+"""
+Represents an update to a `CoreEmployee`. Fields that are set will be updated.
+"""
+input CoreEmployeePatch {
+  id: BigInt
+  familyName: String
+  givenName: String
+  userId: Int
+}
+
+"""All input for the `updateCoreEmployee` mutation."""
+input UpdateCoreEmployeeInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `CoreEmployee` being updated.
+  """
+  patch: CoreEmployeePatch!
+  id: BigInt!
+}
+
+"""All input for the `updateCoreEmployeeByUserId` mutation."""
+input UpdateCoreEmployeeByUserIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `CoreEmployee` being updated.
+  """
+  patch: CoreEmployeePatch!
+  userId: Int!
+}
+
+"""The output of our update `CoreUser` mutation."""
+type UpdateCoreUserPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `CoreUser` that was updated by this mutation."""
+  coreUser: CoreUser
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `CoreUser`. May be used by Relay 1."""
+  coreUserEdge(
+    """The method to use when ordering `CoreUser`."""
+    orderBy: [CoreUsersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CoreUsersEdge
+}
+
+"""All input for the `updateCoreUserByNodeId` mutation."""
+input UpdateCoreUserByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `CoreUser` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `CoreUser` being updated.
+  """
+  patch: CoreUserPatch!
+}
+
+"""
+Represents an update to a `CoreUser`. Fields that are set will be updated.
+"""
+input CoreUserPatch {
+  id: BigInt
+  passwordHash: String
+  email: String
+  userName: String
+  userRole: String
+  isAdmin: Boolean
+}
+
+"""All input for the `updateCoreUser` mutation."""
+input UpdateCoreUserInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `CoreUser` being updated.
+  """
+  patch: CoreUserPatch!
+  id: BigInt!
+}
+
+"""All input for the `updateCoreUserByEmail` mutation."""
+input UpdateCoreUserByEmailInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `CoreUser` being updated.
+  """
+  patch: CoreUserPatch!
+  email: String!
+}
+
+"""The output of our delete `Account` mutation."""
+type DeleteAccountPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Account` that was deleted by this mutation."""
+  account: Account
+  deletedAccountNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Account`. May be used by Relay 1."""
+  accountEdge(
+    """The method to use when ordering `Account`."""
+    orderBy: [AccountsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AccountsEdge
+}
+
+"""All input for the `deleteAccountByNodeId` mutation."""
+input DeleteAccountByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Account` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteAccount` mutation."""
+input DeleteAccountInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+}
+
+"""All input for the `deleteAccountByUserName` mutation."""
+input DeleteAccountByUserNameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  userName: String!
+}
+
+"""The output of our delete `CoreEmployee` mutation."""
+type DeleteCoreEmployeePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `CoreEmployee` that was deleted by this mutation."""
+  coreEmployee: CoreEmployee
+  deletedCoreEmployeeNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `CoreUser` that is related to this `CoreEmployee`."""
+  user: CoreUser
+
+  """An edge for our `CoreEmployee`. May be used by Relay 1."""
+  coreEmployeeEdge(
+    """The method to use when ordering `CoreEmployee`."""
+    orderBy: [CoreEmployeesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CoreEmployeesEdge
+}
+
+"""All input for the `deleteCoreEmployeeByNodeId` mutation."""
+input DeleteCoreEmployeeByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `CoreEmployee` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteCoreEmployee` mutation."""
+input DeleteCoreEmployeeInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+}
+
+"""All input for the `deleteCoreEmployeeByUserId` mutation."""
+input DeleteCoreEmployeeByUserIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  userId: Int!
+}
+
+"""The output of our delete `CoreUser` mutation."""
+type DeleteCoreUserPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `CoreUser` that was deleted by this mutation."""
+  coreUser: CoreUser
+  deletedCoreUserNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `CoreUser`. May be used by Relay 1."""
+  coreUserEdge(
+    """The method to use when ordering `CoreUser`."""
+    orderBy: [CoreUsersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CoreUsersEdge
+}
+
+"""All input for the `deleteCoreUserByNodeId` mutation."""
+input DeleteCoreUserByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `CoreUser` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteCoreUser` mutation."""
+input DeleteCoreUserInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+}
+
+"""All input for the `deleteCoreUserByEmail` mutation."""
+input DeleteCoreUserByEmailInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  email: String!
+}
+
+"""The output of our `authenticate` mutation."""
+type AuthenticatePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  jwtToken: JwtToken
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""
+A JSON Web Token defined by [RFC 7519](https://tools.ietf.org/html/rfc7519)
+which securely represents claims between two parties.
+"""
+scalar JwtToken
+
+"""All input for the `authenticate` mutation."""
+input AuthenticateInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  username: String!
+  password: String!
+}

@@ -1,0 +1,18 @@
+{
+  "name": "graphql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npx postgraphile --subscriptions --watch --dynamic-json --no-setof-functions-contain-nulls --no-ignore-rbac --no-ignore-indexes --show-error-stack=json --extended-errors hint,detail,errcode --append-plugins @graphile-contrib/pg-simplify-inflector --export-schema-graphql schema.graphql --graphiql \"/\" --enhance-graphiql --allow-explain --enable-query-batching --legacy-relations omit",
+    "clean": "npx quasar clean",
+    "build": "quasar build",
+    "fake-api": "npx json-server --watch data/db.json --routes data/routes.json --config data/config.json",
+    "lint": "eslint --ext .js,.vue ./",
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "dependencies": {
+    "@graphile-contrib/pg-simplify-inflector": "^6.1.0",
+    "postgraphile": "^4.12.3"
+  }
+}
