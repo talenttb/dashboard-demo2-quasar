@@ -46,6 +46,35 @@ type Query implements Node {
     condition: AccountCondition
   ): AccountsConnection
 
+  """Reads and enables pagination through a set of `Announcement`."""
+  announcements(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Announcement`."""
+    orderBy: [AnnouncementsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AnnouncementCondition
+  ): AnnouncementsConnection
+
   """Reads and enables pagination through a set of `CoreEmployee`."""
   coreEmployees(
     """Only read the first `n` values of the set."""
@@ -105,6 +134,7 @@ type Query implements Node {
   ): CoreUsersConnection
   account(id: BigInt!): Account
   accountByUserName(userName: String!): Account
+  announcement(id: Int!): Announcement
   coreEmployee(id: BigInt!): CoreEmployee
   coreEmployeeByUserId(userId: Int!): CoreEmployee
   coreUser(id: BigInt!): CoreUser
@@ -115,6 +145,14 @@ type Query implements Node {
     """The globally unique `ID` to be used in selecting a single `Account`."""
     nodeId: ID!
   ): Account
+
+  """Reads a single `Announcement` using its globally unique `ID`."""
+  announcementByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `Announcement`.
+    """
+    nodeId: ID!
+  ): Announcement
 
   """Reads a single `CoreEmployee` using its globally unique `ID`."""
   coreEmployeeByNodeId(
@@ -166,6 +204,8 @@ type Account implements Node {
   userName: String!
   userRole: String!
   isAdmin: Boolean!
+  testRole: RoleType
+  test2Role: TypeOfUserRole!
 }
 
 """
@@ -174,6 +214,17 @@ max value for a JavaScript number. Therefore all big integers will be output as
 strings and not numbers.
 """
 scalar BigInt
+
+enum RoleType {
+  ADMIN
+  USER
+}
+
+enum TypeOfUserRole {
+  ANNOYMENT
+  BASIC
+  ADMIN
+}
 
 """A `Account` edge in the connection."""
 type AccountsEdge {
@@ -222,6 +273,68 @@ input AccountCondition {
 
   """Checks for equality with the object’s `userName` field."""
   userName: String
+}
+
+"""A connection to a list of `Announcement` values."""
+type AnnouncementsConnection {
+  """A list of `Announcement` objects."""
+  nodes: [Announcement!]!
+
+  """
+  A list of edges which contains the `Announcement` and cursor to aid in pagination.
+  """
+  edges: [AnnouncementsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Announcement` you could get from the connection."""
+  totalCount: Int!
+}
+
+type Announcement implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: Int!
+  content: String!
+  beginAt: Datetime!
+  endAt: Datetime
+  deletedAt: Datetime
+}
+
+"""
+A point in time as described by the [ISO
+8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
+"""
+scalar Datetime
+
+"""A `Announcement` edge in the connection."""
+type AnnouncementsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Announcement` at the end of the edge."""
+  node: Announcement!
+}
+
+"""Methods to use when ordering `Announcement`."""
+enum AnnouncementsOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `Announcement` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input AnnouncementCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
 }
 
 """A connection to a list of `CoreEmployee` values."""
@@ -364,6 +477,14 @@ type Mutation {
     input: CreateAccountInput!
   ): CreateAccountPayload
 
+  """Creates a single `Announcement`."""
+  createAnnouncement(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateAnnouncementInput!
+  ): CreateAnnouncementPayload
+
   """Creates a single `CoreEmployee`."""
   createCoreEmployee(
     """
@@ -403,6 +524,24 @@ type Mutation {
     """
     input: UpdateAccountByUserNameInput!
   ): UpdateAccountPayload
+
+  """
+  Updates a single `Announcement` using its globally unique id and a patch.
+  """
+  updateAnnouncementByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateAnnouncementByNodeIdInput!
+  ): UpdateAnnouncementPayload
+
+  """Updates a single `Announcement` using a unique key and a patch."""
+  updateAnnouncement(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateAnnouncementInput!
+  ): UpdateAnnouncementPayload
 
   """
   Updates a single `CoreEmployee` using its globally unique id and a patch.
@@ -478,6 +617,22 @@ type Mutation {
     input: DeleteAccountByUserNameInput!
   ): DeleteAccountPayload
 
+  """Deletes a single `Announcement` using its globally unique id."""
+  deleteAnnouncementByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteAnnouncementByNodeIdInput!
+  ): DeleteAnnouncementPayload
+
+  """Deletes a single `Announcement` using a unique key."""
+  deleteAnnouncement(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteAnnouncementInput!
+  ): DeleteAnnouncementPayload
+
   """Deletes a single `CoreEmployee` using its globally unique id."""
   deleteCoreEmployeeByNodeId(
     """
@@ -531,6 +686,12 @@ type Mutation {
     """
     input: AuthenticateInput!
   ): AuthenticatePayload
+  registUser(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: RegistUserInput!
+  ): RegistUserPayload
 }
 
 """The output of our create `Account` mutation."""
@@ -575,6 +736,52 @@ input AccountInput {
   userName: String!
   userRole: String!
   isAdmin: Boolean!
+  testRole: RoleType
+  test2Role: TypeOfUserRole!
+}
+
+"""The output of our create `Announcement` mutation."""
+type CreateAnnouncementPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Announcement` that was created by this mutation."""
+  announcement: Announcement
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Announcement`. May be used by Relay 1."""
+  announcementEdge(
+    """The method to use when ordering `Announcement`."""
+    orderBy: [AnnouncementsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AnnouncementsEdge
+}
+
+"""All input for the create `Announcement` mutation."""
+input CreateAnnouncementInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Announcement` to be created by this mutation."""
+  announcement: AnnouncementInput!
+}
+
+"""An input for mutations affecting `Announcement`"""
+input AnnouncementInput {
+  id: Int
+  content: String!
+  beginAt: Datetime!
+  endAt: Datetime
+  deletedAt: Datetime
 }
 
 """The output of our create `CoreEmployee` mutation."""
@@ -719,6 +926,8 @@ input AccountPatch {
   userName: String
   userRole: String
   isAdmin: Boolean
+  testRole: RoleType
+  test2Role: TypeOfUserRole
 }
 
 """All input for the `updateAccount` mutation."""
@@ -749,6 +958,74 @@ input UpdateAccountByUserNameInput {
   """
   patch: AccountPatch!
   userName: String!
+}
+
+"""The output of our update `Announcement` mutation."""
+type UpdateAnnouncementPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Announcement` that was updated by this mutation."""
+  announcement: Announcement
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Announcement`. May be used by Relay 1."""
+  announcementEdge(
+    """The method to use when ordering `Announcement`."""
+    orderBy: [AnnouncementsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AnnouncementsEdge
+}
+
+"""All input for the `updateAnnouncementByNodeId` mutation."""
+input UpdateAnnouncementByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Announcement` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Announcement` being updated.
+  """
+  patch: AnnouncementPatch!
+}
+
+"""
+Represents an update to a `Announcement`. Fields that are set will be updated.
+"""
+input AnnouncementPatch {
+  id: Int
+  content: String
+  beginAt: Datetime
+  endAt: Datetime
+  deletedAt: Datetime
+}
+
+"""All input for the `updateAnnouncement` mutation."""
+input UpdateAnnouncementInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Announcement` being updated.
+  """
+  patch: AnnouncementPatch!
+  id: Int!
 }
 
 """The output of our update `CoreEmployee` mutation."""
@@ -978,6 +1255,54 @@ input DeleteAccountByUserNameInput {
   userName: String!
 }
 
+"""The output of our delete `Announcement` mutation."""
+type DeleteAnnouncementPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Announcement` that was deleted by this mutation."""
+  announcement: Announcement
+  deletedAnnouncementNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Announcement`. May be used by Relay 1."""
+  announcementEdge(
+    """The method to use when ordering `Announcement`."""
+    orderBy: [AnnouncementsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AnnouncementsEdge
+}
+
+"""All input for the `deleteAnnouncementByNodeId` mutation."""
+input DeleteAnnouncementByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Announcement` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteAnnouncement` mutation."""
+input DeleteAnnouncementInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
 """The output of our delete `CoreEmployee` mutation."""
 type DeleteCoreEmployeePayload {
   """
@@ -1127,4 +1452,29 @@ input AuthenticateInput {
   clientMutationId: String
   username: String!
   password: String!
+}
+
+"""The output of our `registUser` mutation."""
+type RegistUserPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `registUser` mutation."""
+input RegistUserInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  username: String
+  password: String
 }

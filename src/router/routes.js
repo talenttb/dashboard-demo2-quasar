@@ -3,7 +3,7 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') },
+      { name: 'Home', path: '', component: () => import('pages/Index.vue') },
       {
         name: 'test',
         path: '/test',
@@ -35,6 +35,11 @@ const routes = [
         name: 'WorkOrderMachEffective',
         path: '/reports/mach-effective',
         component: () => import('pages/reports/WorkOrderMachEffective.vue'),
+      },
+      {
+        name: 'WorkOrderMachMetrics',
+        path: '/reports/mach-metric',
+        component: () => import('pages/reports/WorkOrderMachMetrics.vue'),
       },
       {
         name: 'Inspection',
@@ -75,6 +80,8 @@ const routes = [
       },
     ],
   },
+
+  { name: 'Login', path: '/login', component: () => import('pages/Login.vue') },
 
   // Always leave this as last one,
   // but you can also remove it

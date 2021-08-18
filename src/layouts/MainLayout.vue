@@ -1240,6 +1240,29 @@
                 </q-item-section>
               </q-item>
               <q-separator color="white" inset />
+              <q-item
+                :to="{ name: 'WorkOrderMachMetrics' }"
+                active-class="q-item-no-link-highlighting"
+              >
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                    @click.prevent="
+                      (e) => {
+                        showProfile(e, '工單生產狀態查詢', {
+                          name: 'WorkOrderMachMetrics',
+                        })
+                      }
+                    "
+                  ></q-icon>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>*工單生產狀態查詢</q-item-label>
+                </q-item-section>
+              </q-item>
+              <q-separator color="white" inset />
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
                 <q-item-section avatar>
                   <q-icon

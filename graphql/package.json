@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "npx postgraphile --subscriptions --watch --dynamic-json --no-setof-functions-contain-nulls --no-ignore-rbac --no-ignore-indexes --show-error-stack=json --extended-errors hint,detail,errcode --append-plugins @graphile-contrib/pg-simplify-inflector --export-schema-graphql schema.graphql --graphiql \"/\" --enhance-graphiql --allow-explain --enable-query-batching --legacy-relations omit",
+    "dev": "npx postgraphile --subscriptions --no-setof-functions-contain-nulls --no-ignore-rbac --no-ignore-indexes --show-error-stack=json --enhance-graphiql --allow-explain --legacy-relations omit",
     "clean": "npx quasar clean",
     "build": "quasar build",
     "fake-api": "npx json-server --watch data/db.json --routes data/routes.json --config data/config.json",

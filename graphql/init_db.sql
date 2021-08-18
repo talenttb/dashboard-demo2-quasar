@@ -68,3 +68,15 @@ begin
   end if;
 end;
 $$ language plpgsql strict security definer;
+
+CREATE OR REPLACE function app_private.regist_user(
+  username text,
+  password text
+) returns void as
+$$
+begin
+  INSERT INTO app_public.account(password_hash, user_name, user_role, is_admin,test2_role)
+	VALUES(crypt(password, gen_salt('xdes')), username, 'admin', true,'annoyment');
+
+end;
+$$ language 'plpgsql';
