@@ -2,7 +2,7 @@
 import { LocalStorage } from 'quasar'
 import { TOKEN_KEY } from '../Const'
 
-export var getToken = function () {
+export const getToken = function () {
   // LocalStorage.set(key, value)
   const token = LocalStorage.getItem(TOKEN_KEY)
   return token

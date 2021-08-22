@@ -62,10 +62,15 @@
 <script>
 import { ref, watch, onMounted } from 'vue'
 import { getToken, setToken } from '@/libs/auth'
-import { MutGetJWT } from '@/libs/GraphConst'
+import { MutGetJWT, QueryLogin, GET_ANNMNTS } from '@/libs/GraphConst'
 import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
-import { useQuery, useResult, useMutation } from '@vue/apollo-composable'
+import {
+  useQuery,
+  useResult,
+  useMutation,
+  useLazyQuery,
+} from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 import QuasarNotify from '../libs/errorNotify'
 
@@ -81,48 +86,85 @@ export default {
       router.push({ name: 'Home' })
     }
 
-    const { mutate: onLoginClick, onDone } = useMutation(MutGetJWT)
+    // const { mutate: onLoginClick, onDone } = useMutation(MutGetJWT)
 
-    onDone((res) => {
-      if (res?.data?.authenticate?.jwtToken) {
-        setToken(res.data.authenticate.jwtToken)
-        router.push({ name: 'Home' })
-      }
-      // console.log(res.data.authenticate.jwtToken)
-    })
-
-    // const queryOptions = ref({
-    //   enabled: false,
+    // onDone((res) => {
+    //   if (res?.data?.authenticate?.jwtToken) {
+    //     setToken(res.data.authenticate.jwtToken)
+    //     router.push({ name: 'Home' })
+    //   }
+    //   // console.log(res.data.authenticate.jwtToken)
     // })
-    // const { result, refetch, onError } = useQuery(
-    //   gql`
-    //     query getAnnmnts {
-    //       announcements {
-    //         nodes {
-    //           beginAt
-    //           content
-    //           deletedAt
-    //           endAt
-    //           id
-    //         }
-    //       }
-    //     }
-    //   `,
-    //   {},
-    //   queryOptions
-    // )
+
+    // console.log(QueryLogin)
+    // const { result, load: getJWT, called } = useLazyQuery({ query: QueryLogin })
+    // const { result, load: getJWT, called, onError } = useLazyQuery(QueryLogin)
+    // const { result, load: getJWT, called } = useLazyQuery(GET_ANNMNTS)
+    // const {
+    //   result,
+    //   load: getJWT,
+    //   called,
+    // } = useLazyQuery(gql`
+    //   query Login($password: String!, $username: String!) {
+    //     jwtToken: login(password: $password, username: $username)
+    //   }
+    // `)
+
+    // const { result, load: getJWT } = useLazyQuery(gql`
+    //   query list {
+    //     list
+    //   }
+    // `)
+    // const list = useResult(result, [])
+
+    // const { getJWT, result } = useLazyQuery(QueryLogin)
+    // console.log(called)
+    // const repositories =
+    // useResult(result, [], (data) => {
+    //   console.log(called)
+    //   console.log('---')
+    //   console.table(data)
+    //   console.log('---')
+    //   // return data.announcements
+    // })
+
     // onError((error) => {
     //   // logErrorMessages(error)
     //   // console.log(error.graphQLErrors)
-    //   // console.log(error.networkError)
+    //   console.log(error)
     //   QuasarNotify($q, '發生錯誤，請稍後。')
     // })
-    // const repositories = useResult(result, [], (data) => {
+
+    const queryOptions = ref({
+      enabled: false,
+    })
+    const { result, refetch, onError, onResult } = useQuery(
+      QueryLogin,
+      () => ({
+        username: username.value,
+        password: password.value,
+      }),
+      queryOptions
+    )
+    onError((error) => {
+      // logErrorMessages(error)
+      // console.log(error.graphQLErrors)
+      // console.log(error.networkError)
+      QuasarNotify($q, '發生錯誤，請稍後。')
+    })
+    // useResult(result, [], (data) => {
     //   console.log('---')
-    //   console.table(data.announcements.nodes)
+    //   // console.table(data)
     //   console.log('---')
-    //   return data.announcements
+    //   return data
     // })
+    onResult((queryResult) => {
+      console.log(queryResult)
+      console.log(queryResult.data)
+      console.log(queryResult.loading)
+      console.log(queryResult.networkStatus)
+      console.log(queryResult.stale)
+    })
 
     onMounted(() => {
       particlesJS('particles-js', {
@@ -241,16 +283,27 @@ export default {
       username,
       password,
       login() {
-        // if (!queryOptions.value.enabled) {
-        //   queryOptions.value.enabled = true
-        //   return
-        // }
-        // refetch()
+        // console.log('login')
+        if (!queryOptions.value.enabled) {
+          queryOptions.value.enabled = true
+          return
+        }
+        refetch()
 
-        onLoginClick({
-          username: username.value,
-          password: password.value,
-        })
+        // onLoginClick({
+        //   username: username.value,
+        //   password: password.value,
+        // })
+        // getJWT({
+        //   variables: {
+        //     username: username.value,
+        //     password: password.value,
+        //   },
+        // })
+        // getJWT({
+        //   username: username.value,
+        //   password: password.value,
+        // })
       },
     }
   },

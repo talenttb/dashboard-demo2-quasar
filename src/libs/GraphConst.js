@@ -7,3 +7,23 @@ export const MutGetJWT = gql`
     }
   }
 `
+
+export const QueryLogin = gql`
+  query Login($password: String!, $username: String!) {
+    jwtToken: login(password: $password, username: $username)
+  }
+`
+
+export const GET_ANNMNTS = gql`
+  query getAnnmnts {
+    announcements {
+      nodes {
+        beginAt
+        content
+        deletedAt
+        endAt
+        id
+      }
+    }
+  }
+`

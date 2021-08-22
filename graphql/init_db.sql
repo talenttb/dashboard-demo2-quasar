@@ -44,7 +44,7 @@ GRANT SELECT ON app_public.account TO basic_info_role;
 INSERT INTO app_public.account(password_hash, user_name, user_role, is_admin)
 VALUES(crypt('a', gen_salt('xdes')), 'test', 'admin', true);
 
-CREATE OR REPLACE function app_public.authenticate(
+CREATE OR REPLACE function app_public.login(
   username text,
   password text
 ) returns app_public.jwt_token as $$
@@ -53,12 +53,12 @@ declare
 begin
   select  a.* into account
     from app_public.account as a
-    where a.user_name = authenticate.username;
+    where a.user_name = login.username;
 
-  if account.password_hash = crypt(authenticate.password, account.password_hash) then
+  if account.password_hash = crypt(login.password, account.password_hash) then
     return (
       account.user_role || '_role',
-      extract(epoch from now() + interval '7 days'),
+      extract(epoch from now() + interval '1 days'),
       account.id,
       account.is_admin,
       account.user_name
@@ -67,7 +67,7 @@ begin
     return null;
   end if;
 end;
-$$ language plpgsql strict security definer;
+$$ language plpgsql stable strict security definer;
 
 CREATE OR REPLACE function app_private.regist_user(
   username text,

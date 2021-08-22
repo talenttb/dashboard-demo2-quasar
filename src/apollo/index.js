@@ -4,7 +4,7 @@ import { onError } from '@apollo/client/link/error'
 import { useRouter } from 'vue-router'
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:5000/graphql',
+  uri: process.env.GRAPHQL_URI || 'http://localhost:5000/graphql',
   // credentials: 'same-origin',
 })
 

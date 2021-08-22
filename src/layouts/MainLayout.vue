@@ -58,6 +58,24 @@
               <q-avatar size="26px">
                 <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
               </q-avatar>
+              <q-menu>
+                <q-list style="min-width: 100px">
+                  <!-- <Messages></Messages> -->
+                  <q-item-label header>User Controls</q-item-label>
+                  <q-card class="text-center no-shadow no-border">
+                    <!-- style="max-width: 120px !important" -->
+                    <q-btn
+                      label="Logout"
+                      flat
+                      dense
+                      icon="fas fa-sign-out-alt"
+                      class="text-indigo-8"
+                      @click="logoutClick"
+                      to="/login"
+                    ></q-btn>
+                  </q-card>
+                </q-list>
+              </q-menu>
             </q-btn>
           </div>
         </q-toolbar>
@@ -1456,6 +1474,7 @@
 import EssentialLink from 'components/EssentialLink.vue'
 import Messages from 'components/Messages.vue'
 import { useQuasar } from 'quasar'
+import { getToken, logout } from '@/libs/auth'
 
 import { defineComponent, ref, watch, reactive } from 'vue'
 
@@ -1507,6 +1526,10 @@ export default defineComponent({
       },
       link,
       favorites,
+      logoutClick(e) {
+        console.log('logout')
+        logout()
+      },
     }
   },
 })

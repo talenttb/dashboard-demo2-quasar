@@ -139,6 +139,7 @@ type Query implements Node {
   coreEmployeeByUserId(userId: Int!): CoreEmployee
   coreUser(id: BigInt!): CoreUser
   coreUserByEmail(email: String!): CoreUser
+  login(username: String!, password: String!): JwtToken
 
   """Reads a single `Account` using its globally unique `ID`."""
   accountByNodeId(
@@ -464,6 +465,12 @@ input CoreUserCondition {
   """Checks for equality with the object’s `email` field."""
   email: String
 }
+
+"""
+A JSON Web Token defined by [RFC 7519](https://tools.ietf.org/html/rfc7519)
+which securely represents claims between two parties.
+"""
+scalar JwtToken
 
 """
 The root mutation type which contains root level fields which mutate data.
@@ -1436,12 +1443,6 @@ type AuthenticatePayload {
   """
   query: Query
 }
-
-"""
-A JSON Web Token defined by [RFC 7519](https://tools.ietf.org/html/rfc7519)
-which securely represents claims between two parties.
-"""
-scalar JwtToken
 
 """All input for the `authenticate` mutation."""
 input AuthenticateInput {
