@@ -78,6 +78,11 @@ const routes = [
         path: '/equipment/maintenance',
         component: () => import('pages/equipment/Maintenance.vue'),
       },
+      {
+        name: 'FieldDevices',
+        path: '/equipment/field-device',
+        component: () => import('pages/equipment/FieldDevices.vue'),
+      },
     ],
   },
 

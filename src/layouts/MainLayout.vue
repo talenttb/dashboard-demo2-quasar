@@ -888,6 +888,29 @@
             expand-icon-class="text-white"
           >
             <q-list class="q-pl-lg text-white">
+              <q-item
+                :to="{ name: 'FieldDevices' }"
+                active-class="q-item-no-link-highlighting"
+              >
+                <q-item-section avatar>
+                  <q-icon
+                    color="blue-grey-1"
+                    name="push_pin"
+                    size="xs"
+                    @click.prevent="
+                      (e) => {
+                        showProfile(e, '設備管理', {
+                          name: 'FieldDevices',
+                        })
+                      }
+                    "
+                  ></q-icon>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>*設備管理</q-item-label>
+                </q-item-section>
+              </q-item>
+              <q-separator color="white" inset />
               <q-item to="/Map" active-class="q-item-no-link-highlighting">
                 <q-item-section avatar>
                   <q-icon
@@ -1527,7 +1550,6 @@ export default defineComponent({
       link,
       favorites,
       logoutClick(e) {
-        console.log('logout')
         logout()
       },
     }

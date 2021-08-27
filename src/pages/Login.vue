@@ -4,7 +4,7 @@
       <q-page class="flex flex-center">
         <div
           id="particles-js"
-          :class="$q.dark.isActive ? 'dark_gradient' : 'normal_gradient'"
+          :class="$q.dark.isActive ? 'dark_gradient' : 'normal-gradient'"
         ></div>
         <q-btn
           color="white"
@@ -62,7 +62,7 @@
 <script>
 import { ref, watch, onMounted } from 'vue'
 import { getToken, setToken } from '@/libs/auth'
-import { MutGetJWT, QueryLogin, GET_ANNMNTS } from '@/libs/GraphConst'
+import { MUTE_GET_JWT, QUERY_LOGIN, GET_ANNMNTS } from '@/libs/GraphConst'
 import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
 import {
@@ -86,7 +86,7 @@ export default {
       router.push({ name: 'Home' })
     }
 
-    // const { mutate: onLoginClick, onDone } = useMutation(MutGetJWT)
+    // const { mutate: onLoginClick, onDone } = useMutation(MUTE_GET_JWT)
 
     // onDone((res) => {
     //   if (res?.data?.authenticate?.jwtToken) {
@@ -96,9 +96,9 @@ export default {
     //   // console.log(res.data.authenticate.jwtToken)
     // })
 
-    // console.log(QueryLogin)
-    // const { result, load: getJWT, called } = useLazyQuery({ query: QueryLogin })
-    // const { result, load: getJWT, called, onError } = useLazyQuery(QueryLogin)
+    // console.log(QUERY_LOGIN)
+    // const { result, load: getJWT, called } = useLazyQuery({ query: QUERY_LOGIN })
+    // const { result, load: getJWT, called, onError } = useLazyQuery(QUERY_LOGIN)
     // const { result, load: getJWT, called } = useLazyQuery(GET_ANNMNTS)
     // const {
     //   result,
@@ -117,7 +117,7 @@ export default {
     // `)
     // const list = useResult(result, [])
 
-    // const { getJWT, result } = useLazyQuery(QueryLogin)
+    // const { getJWT, result } = useLazyQuery(QUERY_LOGIN)
     // console.log(called)
     // const repositories =
     // useResult(result, [], (data) => {
@@ -139,7 +139,7 @@ export default {
       enabled: false,
     })
     const { result, refetch, onError, onResult } = useQuery(
-      QueryLogin,
+      QUERY_LOGIN,
       () => ({
         username: username.value,
         password: password.value,
@@ -158,12 +158,18 @@ export default {
     //   console.log('---')
     //   return data
     // })
-    onResult((queryResult) => {
-      console.log(queryResult)
-      console.log(queryResult.data)
-      console.log(queryResult.loading)
-      console.log(queryResult.networkStatus)
-      console.log(queryResult.stale)
+    onResult((res) => {
+      // console.log(res)
+      console.log(res.data)
+      // console.log(res.loading)
+      // console.log(res.networkStatus)
+      // console.log(res.stale)
+      if (!res.loading && res.data) {
+        if (res?.data?.jwtToken) {
+          setToken(res.data.jwtToken)
+          router.push({ name: 'Home' })
+        }
+      }
     })
 
     onMounted(() => {
@@ -318,8 +324,8 @@ export default {
   background-size: cover;
   background-position: 50% 50%;
 }
-.normal_gradient {
-  background: linear-gradient(145deg, rgb(74, 94, 137) 15%, #b61924 70%);
+.normal-gradient {
+  background: linear-gradient(145deg, #13244d 15%, #497df8cb 75%);
 }
 .dark_gradient {
   background: linear-gradient(145deg, rgb(11, 26, 61) 15%, #4c1014 70%);

@@ -37,19 +37,12 @@ export default route(function (/* { store, ssrContext } */) {
     ),
   })
 
-  // routes.beforeEach((to, from, next) => {
-  // if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
-  // else next()
-  // })
-
   Router.beforeEach((to, from, next) => {
-    if (to.name !== 'Login' && !getToken()) next({ name: 'Login' })
+    // console.log(to)
+    // console.log(from)
+    if (to.name !== 'Login' && !getToken())
+      next({ name: 'Login', query: from.fullPath })
     else next()
-    // if (true) {
-    //   next({ name: 'Login', query: { next: to.fullPath } })
-    // } else {
-    //   next()
-    // }
   })
 
   return Router

@@ -2,6 +2,7 @@ import { createHttpLink, InMemoryCache, from } from '@apollo/client/core'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { useRouter } from 'vue-router'
+import { getToken, logout } from '@/libs/auth'
 
 const httpLink = createHttpLink({
   uri: process.env.GRAPHQL_URI || 'http://localhost:5000/graphql',
@@ -9,7 +10,7 @@ const httpLink = createHttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('token')
+  const token = getToken()
   return {
     headers: {
       ...headers,
@@ -18,31 +19,41 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors)
-    graphQLErrors.forEach(({ message, locations, path, extensions }) => {
-      // console.log(extensions)
-      if (extensions?.exception.errcode === '42501') {
-        const router = useRouter()
-        // console.log(router)
-        router.push({ name: 'Login' })
-      }
-      // console.table(locations)
-      // console.table(extensions)
-      // console.log(message)
-      console.log(`[GraphQL error]: Message: ${message}`)
-      // return
-    })
+const errorLink = function (options) {
+  return onError(({ graphQLErrors, networkError, operation, forward }) => {
+    console.log(options)
+    console.log(options.router.currentRoute)
+    if (graphQLErrors)
+      graphQLErrors.forEach(({ message, extensions }) => {
+        // console.log('*******************')
+        // console.log(options)
+        // console.log(options.router)
+        // console.log(extensions)
+        // console.log(extensions?.exception.errcode)
+        // console.log(message)
+        // console.log(operation)
+        // console.log(forward)
+        // console.log('*******************')
+        if (
+          extensions?.exception.errcode === '42501' ||
+          message === 'jwt expired'
+        ) {
+          logout()
+          options.router.push({ name: 'Login' })
+        }
+        console.log(`[GraphQL error]: Message: ${message}`)
+      })
 
-  if (networkError) console.log(`[Network error]: ${networkError}`)
-})
+    if (networkError) console.log(`[Network error]: ${networkError}`)
+  })
+}
 
 export /* async */ function getClientOptions(/* {app, router, ...} */ options) {
   return Object.assign(
     // General options.
     {
       // link: authLink.concat(httpLink),
-      link: from([errorLink, httpLink]),
+      link: from([errorLink(options), authLink, httpLink]),
       cache: new InMemoryCache(),
     },
     // Specific Quasar mode options.

@@ -2,10 +2,12 @@ import { ApolloClient /*, createHttpLink */ } from '@apollo/client/core'
 import { ApolloClients } from '@vue/apollo-composable'
 import { boot } from 'quasar/wrappers'
 import { getClientOptions } from 'src/apollo'
+import { useRouter } from 'vue-router'
+
 export default boot(
-  /* async */ ({ app }) => {
+  /* async */ ({ app, router }) => {
     // Default client.
-    const options = /* await */ getClientOptions(/* {app, router ...} */)
+    const options = /* await */ getClientOptions({ app: app, router: router })
     const apolloClient = new ApolloClient(options)
     // // Additional client `clientA`
     // const optionsA = { ...options }
