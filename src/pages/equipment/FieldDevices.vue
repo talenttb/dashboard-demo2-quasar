@@ -67,10 +67,6 @@
       <DeviceList :fieldId="fieldSelected[0]?.id"></DeviceList>
     </div>
 
-    <!-- <q-inner-loading :showing="visible">
-      <q-spinner-gears size="50px" color="primary" />
-    </q-inner-loading> -->
-
     <!-- place QPageSticky at end of page -->
     <q-page-sticky expand position="top">
       <q-toolbar
@@ -86,6 +82,7 @@
   <NewField
     v-show="showNewField"
     :showAddRow="showNewField"
+    :fieldId="fieldActionId"
     @close="closeNewField"
   ></NewField>
 </template>
@@ -95,10 +92,10 @@ import { ref, reactive, computed, readonly } from 'vue'
 import { api } from 'boot/axios'
 import { date, useQuasar } from 'quasar'
 import QuasarNotify from '../../libs/errorNotify'
-import { QUERY_FIELDS } from '@/libs/GraphConst'
+import { QUERY_FIELDS, DELETE_FIELD } from '@/libs/GraphConst'
 import NewField from 'components/equipment/NewField.vue'
 import DeviceList from 'components/equipment/DeviceList.vue'
-import { useQuery, useResult } from '@vue/apollo-composable'
+import { useQuery, useResult, useMutation } from '@vue/apollo-composable'
 
 export default {
   components: {
@@ -109,6 +106,7 @@ export default {
     const $q = useQuasar()
     const fieldTblRef = ref(null)
     const fieldSelected = ref([])
+    const fieldActionId = ref(null)
     const showNewField = ref(false)
     // const loading = ref(false)
     const fieldFilter = ref('')
@@ -184,15 +182,24 @@ export default {
     const fieldRows = useResult(result, [], (data) => {
       // console.log('---')
       // console.table(data)
+      // console.table(data.fields.nodes)
+      // console.table(data.fields.nodes.filter((item) => !item.deletedAt))
       // console.log('---')
-      return data.fields.nodes
+      return data.fields.nodes.filter((item) => !item.deletedAt)
+    })
+
+    const { mutate: onFieldDeleted, onDone: onDeletedDone } =
+      useMutation(DELETE_FIELD)
+
+    onDeletedDone((res) => {
+      console.log(res)
     })
 
     return {
       fieldFilter,
       fieldSelected,
       onFieldSelection,
-
+      fieldActionId,
       fieldTblRef,
       fieldHeaders,
       fieldVisibleHeaders,
@@ -203,6 +210,7 @@ export default {
         showNewField.value = true
       },
       closeNewField() {
+        fieldActionId.value = null
         showNewField.value = false
         refetch()
       },
@@ -211,10 +219,38 @@ export default {
         console.log(editItem.value)
       },
       onEditField(d) {
-        console.log(d)
+        showNewField.value = true
+        fieldActionId.value = d.id
+        // console.log(d)
       },
       onDeleteField(d) {
-        console.log(d.name)
+        const timeStamp = +new Date()
+        const dt = date.formatDate(timeStamp, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
+        console.log(dt)
+        $q.dialog({
+          title: 'Confirm',
+          message: `是否刪除 ${d.name} ？`,
+          cancel: true,
+          persistent: true,
+        })
+          .onOk(() => {
+            onFieldDeleted({
+              id: d.id,
+              deletedAt: dt,
+            })
+          })
+          .onOk(() => {
+            refetch()
+          })
+          .onCancel(() => {
+            console.log('>>>> Cancel')
+          })
+          .onDismiss(() => {
+            // console.log('I am triggered on both OK and Cancel')
+          })
+        // showNewField.value = true
+        // fieldActionId.value = d.id
+        // console.log(d.name)
       },
       selectField(selectedRow) {
         // props.expand

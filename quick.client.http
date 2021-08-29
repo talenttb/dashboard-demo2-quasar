@@ -1,0 +1,14 @@
+
+###
+POST http://localhost:5000/graphql
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query Login($password: String!, $username: String!) {
+  jwtToken: login(password: $password, username: $username)
+}
+
+{
+    "username": "test",
+    "password": "a"
+}

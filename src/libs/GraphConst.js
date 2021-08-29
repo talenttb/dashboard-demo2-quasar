@@ -37,7 +37,20 @@ export const QUERY_FIELDS = gql`
         description
         id
         name
+        deletedAt
       }
+    }
+  }
+`
+
+export const QUERY_FIELD_BY_ID = gql`
+  query QueryField($id: Int!) {
+    field(id: $id) {
+      id
+      name
+      description
+      createdAt
+      deletedAt
     }
   }
 `
@@ -100,8 +113,8 @@ export const UPDATE_FIELD = gql`
   }
 `
 export const DELETE_FIELD = gql`
-  mutation DeleteField($id: Int!) {
-    updateField(input: { patch: { deletedAt: "" }, id: $id }) {
+  mutation DeleteField($id: Int!, $deletedAt: Datetime!) {
+    updateField(input: { patch: { deletedAt: $deletedAt }, id: $id }) {
       field {
         id
       }
